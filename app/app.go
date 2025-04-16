@@ -142,11 +142,11 @@ import (
 )
 
 const (
-	AppName = "arkeo"
+	AppName = "uram"
 )
 
 const (
-	NodeDir      = ".arkeo"
+	NodeDir      = ".uram"
 	Bech32Prefix = AccountAddressPrefix
 )
 

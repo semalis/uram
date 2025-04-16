@@ -3,5 +3,5 @@
 package app
 
 const (
-	AccountAddressPrefix = "tarkeo"
+	AccountAddressPrefix = "uram"
 )
