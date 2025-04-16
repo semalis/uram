@@ -28,8 +28,8 @@ ldflags = -X github.com/arkeonetwork/arkeo/x/arkeo/configs.Version=$(LATEST_VERS
 		  -X github.com/arkeonetwork/arkeo/sentinel.Version=$(SENTINEL_VERSION) \
           -X github.com/arkeonetwork/arkeo/x/arkeo/configs.GitCommit=$(COMMIT) \
           -X github.com/arkeonetwork/arkeo/x/arkeo/configs.BuildTime=${NOW} \
-		  -X github.com/cosmos/cosmos-sdk/version.Name=Arkeo \
-		  -X github.com/cosmos/cosmos-sdk/version.AppName=arkeo \
+		  -X github.com/cosmos/cosmos-sdk/version.Name=Uram \
+		  -X github.com/cosmos/cosmos-sdk/version.AppName=uram \
 		  -X github.com/cosmos/cosmos-sdk/version.Version=$(LATEST_VERSION) \
 		  -X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT) \
 		  -X github.com/cosmos/cosmos-sdk/version.BuildTags=$(TAG)

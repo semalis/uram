@@ -141,7 +141,7 @@ Contains all the PRs that improved the code without changing the behaviors.
 - Fixed claim timeout.
 - Fixed module imports.
 - Updated module to implement `APPModuleBasic` and `AppModule`.
-- Updated tests for Arkeo module keeper.
+- Updated tests for Uram module keeper.
 - Fixed version issue in `begin_blocker`.
 - Fixed Genesis URL.
 - Fixed Thorchain claim server address on mainnet.
@@ -165,7 +165,7 @@ Contains all the PRs that improved the code without changing the behaviors.
 - Updated Docker dependencies.
 - Fixed CI checks and release checks.
 - Fixed unit tests and module imports.
-- Fixed default commands in the Arkeo CLI.
+- Fixed default commands in the Uram CLI.
 
 ---
 
