@@ -260,7 +260,7 @@ func (ac appCreator) appExport(
 }
 
 var tempDir = func() string {
-	dir, err := os.MkdirTemp("", "arkeod")
+	dir, err := os.MkdirTemp("", "uramd")
 	if err != nil {
 		panic("failed to create temp dir:" + err.Error())
 	}
