@@ -19,7 +19,7 @@ func main() {
 
 	syn := make(chan error)
 	go func() {
-		syn <- svrcmd.Execute(rootCmd, "ARKEO", app.DefaultNodeHome)
+		syn <- svrcmd.Execute(rootCmd, "URAM", app.DefaultNodeHome)
 	}()
 
 	sig := make(chan os.Signal, 1)
