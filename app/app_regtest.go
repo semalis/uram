@@ -137,12 +137,12 @@ import (
 )
 
 const (
-	AppName = "arkeo"
+	AppName = "uram"
 )
 
 const (
-	NodeDir      = ".arkeo"
-	Bech32Prefix = "tarkeo"
+	NodeDir      = ".uram"
+	Bech32Prefix = "uram"
 )
 
 var (
