@@ -14,7 +14,7 @@ endif
 .PHONY: build test tools
 
 # compiler flags
-IMAGE="arkeo"
+IMAGE="uram"
 PROJECT_NAME= arkeo
 DOCKER := $(shell which docker)
 NOW=$(shell date +'%Y-%m-%d_%T')
