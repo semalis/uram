@@ -13,10 +13,10 @@ fi
 # should be an ip address or domain name
 HOST=$1
 
-# should be the key name (ie arkeod keys list --keyring-backend test)
+# should be the key name (ie uramd keys list --keyring-backend test)
 USER=$2
 
-BIN="arkeod"
+BIN="uramd"
 BIN_TX="arkeo"
 
 raw_claims=$(curl -sL "$HOST":3636/open-claims | jq '.[] | select(.claimed == false) | @json')

@@ -23,7 +23,7 @@ import (
 func export(path string) error {
 	// export state
 	log.Debug().Msg("Exporting state")
-	cmd := exec.Command("arkeod", "export")
+	cmd := exec.Command("uramd", "export")
 	out, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Fatal().Err(err).Msg("failed to export state")

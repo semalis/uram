@@ -2,11 +2,11 @@
 
 ## How does cosmovisor work?
 Cosmovisor is designed to be used as an abstract interface for the Cosmos SDK chain, for example Arkeo. Some key takeaways about Cosmovisor:
-- It passes arguments to arkeod (which is configured by DAEMON_NAME env variable).
-- It manages arkeod by restarting and upgrading if needed.
+- It passes arguments to uramd (which is configured by DAEMON_NAME env variable).
+- It manages uramd by restarting and upgrading if needed.
 - It is configured using environment variables, not positional arguments.
-- Running cosmovisor run arg1 arg2 .... runs arkeod arg1 arg2 ...
-- All arguments passed to cosmovisor run are passed to the application binary, as a subprocess. As cosmovisor returns /dev/stdout and /dev/stderr of the subprocess as its own, cosmovisor run cannot accept any command-line arguments other than those available to arkeod.
+- Running cosmovisor run arg1 arg2 .... runs uramd arg1 arg2 ...
+- All arguments passed to cosmovisor run are passed to the application binary, as a subprocess. As cosmovisor returns /dev/stdout and /dev/stderr of the subprocess as its own, cosmovisor run cannot accept any command-line arguments other than those available to uramd.
 
 Make sure to check the [cosmovisor documentation](https://docs.cosmos.network/main/tooling/cosmovisor) for a comprehensive guide on how to use Cosmovisor.
 
@@ -32,9 +32,9 @@ mkdir -p "${HOME}"/.arkeo/cosmovisor/genesis/bin
 mkdir "${HOME}"/.arkeo/cosmovisor/upgrades
 ```
 
-Then copy the arkeod binary to `genesis/bin` directory 
+Then copy the uramd binary to `genesis/bin` directory 
 ```shell
-cp "${GOPATH}"/bin/arkeod "${HOME}"/.arkeo/cosmovisor/genesis/bin
+cp "${GOPATH}"/bin/uramd "${HOME}"/.arkeo/cosmovisor/genesis/bin
 ```
 Add the necessary environment variables, for example by adding these variables to the profile that will be running Cosmovisor. You can edit the ~/.profile file by adding the following content:
 
@@ -42,7 +42,7 @@ Add the necessary environment variables, for example by adding these variables t
 export DAEMON_HOME="${HOME}"/.arkeo
 export DAEMON_RESTART_AFTER_UPGRADE=true
 export DAEMON_ALLOW_DOWNLOAD_BINARIES=false
-export DAEMON_NAME=arkeod
+export DAEMON_NAME=uramd
 export UNSAFE_SKIP_BACKUP=true
 ```
 Before running cosmovisor , you should make sure to have initialized the arkeo node and configured joining network by downloading genesis file , setting up peers and snapshot if any.
@@ -64,7 +64,7 @@ ExecStart=cosmovisor run  start --x-crisis-skip-assert-invariants
 Restart=always
 RestartSec=3
 LimitNOFILE=4096
-Environment="DAEMON_NAME=arkeod"
+Environment="DAEMON_NAME=uramd"
 Environment="DAEMON_HOME=/<path-to-arkeo>/.arkeo"
 Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=false"
 Environment="DAEMON_RESTART_AFTER_UPGRADE=true"

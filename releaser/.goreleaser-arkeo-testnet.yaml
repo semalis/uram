@@ -6,9 +6,9 @@ env:
   - CGO_ENABLED=1
 
 builds:
-  - id: arkeod-testnet-linux-amd64
-    binary: arkeod
-    main: ./cmd/arkeod
+  - id: uramd-testnet-linux-amd64
+    binary: uramd
+    main: ./cmd/uramd
     goos:
       - linux
     goarch:
@@ -35,9 +35,9 @@ builds:
 archives:
   - id: archive-versioned
     builds:
-      - arkeod-testnet-linux-amd64
+      - uramd-testnet-linux-amd64
     name_template: >-
-      arkeod_{{ .Version }}_{{ .Os }}_{{ .Arch }}_testnet
+      uramd_{{ .Version }}_{{ .Os }}_{{ .Arch }}_testnet
     wrap_in_directory: false
     format: zip
     files:
@@ -45,9 +45,9 @@ archives:
 
   - id: archive-binary
     builds:
-      - arkeod-testnet-linux-amd64
+      - uramd-testnet-linux-amd64
     name_template: >-
-      arkeod_{{ .Os }}_{{ .Arch }}_testnet
+      uramd_{{ .Os }}_{{ .Arch }}_testnet
     wrap_in_directory: false
     format: binary
     files:
@@ -55,7 +55,7 @@ archives:
 
 checksum:
   name_template: >-
-    arkeod_{{ .Version }}_testnet_checksums.txt
+    uramd_{{ .Version }}_testnet_checksums.txt
 
 dockers:
   - use: buildx
@@ -69,7 +69,7 @@ dockers:
       - "--pull"
       - "--platform=linux/amd64"
       - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title=arkeod-testnet"
+      - "--label=org.opencontainers.image.title=uramd-testnet"
       - "--label=org.opencontainers.image.description=Arkeo Daemon Testnet"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
@@ -88,7 +88,7 @@ dockers:
       - "--pull"
       - "--platform=linux/amd64"
       - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title=arkeod-testnet-dev"
+      - "--label=org.opencontainers.image.title=uramd-testnet-dev"
       - "--label=org.opencontainers.image.description=Arkeo Daemon Testnet Development Build"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"

@@ -35,7 +35,7 @@ Build
 make install
 ```
 
-This will install `arkeod` binary to your `GOPATH`
+This will install `uramd` binary to your `GOPATH`
 
 # Running Localnet
 

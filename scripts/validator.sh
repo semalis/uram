@@ -12,9 +12,9 @@ GENESIS="${GENESIS:=$RPC}"
 if [ ! -f ~/.arkeo/config/genesis.json ]; then
 	echo "setting validator node"
 
-	arkeod init local --chain-id "$CHAIN_ID"
-   	arkeod config set client keyring-backend test
-   	arkeod config set client chain-id arkeo-testnet-3
+	uramd init local --chain-id "$CHAIN_ID"
+   	uramd config set client keyring-backend test
+   	uramd config set client chain-id arkeo-testnet-3
 	
 
 	rm -rf ~/.arkeo/config/genesis.json
@@ -41,7 +41,7 @@ if [ ! -f ~/.arkeo/config/genesis.json ]; then
 	sed -i -e  "s/seeds = \"\"/seeds = \"$PEER_ID@$SEED\"/g" ~/.arkeo/config/config.toml
 
 	# TODO: create this one as a validator
-	# arkeod tx staking create-validator --chain-id arkeo --commission-rate 0.05 --commission-max-rate 0.2 --commission-max-change-rate 0.1 --min-self-delegation "1" --amount <staking amount>uarkeo --pubkey $(arkeod tendermint show-validator) --moniker "<yourvalidator-name>" --from <your-wallet-name> --fees="5000uarkeo" --yes
+	# uramd tx staking create-validator --chain-id arkeo --commission-rate 0.05 --commission-max-rate 0.2 --commission-max-change-rate 0.1 --min-self-delegation "1" --amount <staking amount>uarkeo --pubkey $(uramd tendermint show-validator) --moniker "<yourvalidator-name>" --from <your-wallet-name> --fees="5000uarkeo" --yes
 fi
 
-arkeod start
+uramd start

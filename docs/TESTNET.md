@@ -55,11 +55,11 @@
 
 ### 2. **Configure the binary:**
    ```bash
-   arkeod init <your-custom-moniker> --chain-id arkeo-testnet-3
-   arkeod config set client chain-id arkeo-testnet-3
-   arkeod config set client node tcp://localhost:${ARKEO_PORT}57
-   arkeod config set client keyring-backend test
-   arkeod keys add <key-name>   
+   uramd init <your-custom-moniker> --chain-id arkeo-testnet-3
+   uramd config set client chain-id arkeo-testnet-3
+   uramd config set client node tcp://localhost:${ARKEO_PORT}57
+   uramd config set client keyring-backend test
+   uramd keys add <key-name>   
    sudo ufw allow ${ARKEO_PORT}56/tcp
    ```
 
@@ -109,7 +109,7 @@ curl -s http://seed31.innovationtheory.com:26657/genesis | jq '.result.genesis' 
    [Service]
    User=$USER
    WorkingDirectory=$HOME/.arkeo
-   ExecStart= $(which arkeod) start --home $HOME/.arkeo
+   ExecStart= $(which uramd) start --home $HOME/.arkeo
    Restart=on-failure
    RestartSec=5
    LimitNOFILE=65535
@@ -120,7 +120,7 @@ curl -s http://seed31.innovationtheory.com:26657/genesis | jq '.result.genesis' 
 
 ### **Reset the node:**
    ```bash
-   arkeod tendermint unsafe-reset-all --home $HOME/.arkeo --keep-addr-book
+   uramd tendermint unsafe-reset-all --home $HOME/.arkeo --keep-addr-book
    ```
 
 ---

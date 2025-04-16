@@ -150,7 +150,7 @@ localnet: build-docker-localnet
 
 install-testnet-binary:
 	@TAG=testnet $(MAKE) $(TESTNET_BUILD)
-	@cp dist/arkeod-$(BUILD_OS)-$(IMAGE_ARCH)_$(BUILD_OS)_$(IMAGE_ARCH)$(if $(filter amd64,$(IMAGE_ARCH)),_v1)/arkeod $(HOME)/go/bin
+	@cp dist/uramd-$(BUILD_OS)-$(IMAGE_ARCH)_$(BUILD_OS)_$(IMAGE_ARCH)$(if $(filter amd64,$(IMAGE_ARCH)),_v1)/uramd $(HOME)/go/bin
 
 testnet-fullnode:
 	@docker run --rm -it -p 1317:1317 -p 26656:26656 -p 26657:26657 -v ./scripts:/scripts --entrypoint /scripts/fullnode.sh ghcr.io/arkeonetwork/arkeo:latest
@@ -207,7 +207,7 @@ test-regression-coverage:
 _build-test-regression:
 	@go install -ldflags '$(ldflags)' -tags=testnet,regtest ${BINARIES}
 	@go install ${BUILD_FLAGS} ./tools/mock-daemon
-	@go build -ldflags '$(ldflags)' -cover -tags=testnet,regtest -o /regtest/cover-arkeod ./cmd/arkeod
+	@go build -ldflags '$(ldflags)' -cover -tags=testnet,regtest -o /regtest/cover-uramd ./cmd/uramd
 	@go build -ldflags '$(ldflags)' -cover -tags=testnet,regtest -o /regtest/cover-sentinel ./cmd/sentinel
 	@go build -ldflags '$(ldflags)' -cover -tags=testnet,regtest -o /regtest/cover-directory-api ./cmd/directory/api
 	@go build -ldflags '$(ldflags)' -cover -tags=testnet,regtest -o /regtest/cover-directory-indexer ./cmd/directory/indexer
@@ -265,13 +265,13 @@ proto-check-breaking:
 	@echo "Checking for breaking changes"
 	@$(DOCKER_BUF) breaking --against $(HTTPS_GIT)#branch=main
 
-# arkeod binaries
+# uramd binaries
 dist:
 	rm -rf bin && mkdir -p bin/linux_amd64 bin/linux_arm64 bin/darwin_amd64 bin/darwin_arm64
-	env GOOS=linux GOARCH=amd64 go build -o bin/linux_amd64 ${BUILD_FLAGS} ./cmd/arkeod
-	env GOOS=linux GOARCH=arm64 go build -o bin/linux_arm64 ${BUILD_FLAGS} ./cmd/arkeod
-	env GOOS=darwin GOARCH=amd64 go build -o bin/darwin_amd64 ${BUILD_FLAGS} ./cmd/arkeod
-	env GOOS=darwin GOARCH=arm64 go build -o bin/darwin_arm64 ${BUILD_FLAGS} ./cmd/arkeod
+	env GOOS=linux GOARCH=amd64 go build -o bin/linux_amd64 ${BUILD_FLAGS} ./cmd/uramd
+	env GOOS=linux GOARCH=arm64 go build -o bin/linux_arm64 ${BUILD_FLAGS} ./cmd/uramd
+	env GOOS=darwin GOARCH=amd64 go build -o bin/darwin_amd64 ${BUILD_FLAGS} ./cmd/uramd
+	env GOOS=darwin GOARCH=arm64 go build -o bin/darwin_arm64 ${BUILD_FLAGS} ./cmd/uramd
 
 	env GOOS=linux GOARCH=amd64 go build -o bin/linux_amd64 ${BUILD_FLAGS} ./tools/curleo
 	env GOOS=linux GOARCH=arm64 go build -o bin/linux_arm64 ${BUILD_FLAGS} ./tools/curleo

@@ -15,7 +15,7 @@ if [ -z "$3" ]; then
 	exit 1
 fi
 
-BIN="arkeod"
+BIN="uramd"
 BIN_TX="arkeo"
 USER="$1"
 SERVICE="$2"

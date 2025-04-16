@@ -1,6 +1,6 @@
 generated
-/arkeod
-.arkeo/
+/uramd
+.uram/
 .sentinel*
 tmp-swagger-gen/
 cmd/**/__debug_bin

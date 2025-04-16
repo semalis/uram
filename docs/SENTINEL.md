@@ -7,7 +7,7 @@
 To create a wallet account for the provider, run the following command:
 
 ```shell
-arkeod  add <provider-wallet-account> --keyring-backend test
+uramd  add <provider-wallet-account> --keyring-backend test
 ```
 
 ### 🔍 Get the Provider Public Key
@@ -15,13 +15,13 @@ arkeod  add <provider-wallet-account> --keyring-backend test
 Retrieve the provider's public key with:
 
 ```bash
-arkeod  show <provider-wallet-account> -p --keyring-backend test | jq -r .key
+uramd  show <provider-wallet-account> -p --keyring-backend test | jq -r .key
 ```
 
 Convert the result to Bech32 format:
 
 ```bash
-arkeod debug pubkey-raw <result-from-above-command> | grep "Bech32 Acc" | awk '{ print $NF }'
+uramd debug pubkey-raw <result-from-above-command> | grep "Bech32 Acc" | awk '{ print $NF }'
 ```
 
 > **ℹ️ Note:** Request tokens from the faucet to bond the provider in the relevant 💬 Discord channel.
@@ -31,7 +31,7 @@ arkeod debug pubkey-raw <result-from-above-command> | grep "Bech32 Acc" | awk '{
 Bond your provider by executing the following command:
 
 ```shell
-arkeod tx arkeo bond-provider <provider-pubkey> <service-providing> <bond-amount> --from <provider-wallet> --keyring-backend 🧪 --fees 20uarkeo
+uramd tx arkeo bond-provider <provider-pubkey> <service-providing> <bond-amount> --from <provider-wallet> --keyring-backend 🧪 --fees 20uarkeo
 ```
 
 ## 🚀 Starting the Sentinel Service
@@ -99,7 +99,7 @@ I[2024-10-28|11:58:20.057] service start                                msg="Sta
 Once the Sentinel service is running, update the provider metadata by running:
 
 ```shell
-arkeod tx arkeo mod-provider <provider-pubkey> <service> "http://<sentineladdress>/metadata.json" <nonce> <status> <min-contract-duration> <max-contract-duration> <subscription-rates> <pay-as-you-go-rates> <settlement-duration> --from <provider-wallet> --keyring-backend  --fees 20uarkeo
+uramd tx arkeo mod-provider <provider-pubkey> <service> "http://<sentineladdress>/metadata.json" <nonce> <status> <min-contract-duration> <max-contract-duration> <subscription-rates> <pay-as-you-go-rates> <settlement-duration> --from <provider-wallet> --keyring-backend  --fees 20uarkeo
 ```
 
 ## Sequence Diagram

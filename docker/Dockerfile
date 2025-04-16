@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-COPY ./arkeod /usr/bin/arkeod
+COPY ./uramd /usr/bin/uramd
 
 WORKDIR /root/.arkeo
 
@@ -17,4 +17,4 @@ EXPOSE 26657
 
 ENTRYPOINT [ "/bin/sh" ]
 
-CMD [ "/usr/bin/arkeod", "help" ]
+CMD [ "/usr/bin/uramd", "help" ]

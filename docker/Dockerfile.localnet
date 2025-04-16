@@ -44,7 +44,7 @@ RUN apt-get update -y && \
 RUN update-ca-certificates
 
 # Copy the compiled binaries over.
-COPY --from=builder /go/bin/sentinel /go/bin/arkeod /go/bin/indexer /go/bin/api /go/bin/tern /usr/bin/
+COPY --from=builder /go/bin/sentinel /go/bin/uramd /go/bin/indexer /go/bin/api /go/bin/tern /usr/bin/
 COPY scripts /scripts
 
 ARG TAG=testnet
@@ -59,4 +59,4 @@ EXPOSE 26657
 ENTRYPOINT ["scripts/genesis.sh"]
 
 # default to fullnode
-CMD ["arkeod", "start"]
+CMD ["uramd", "start"]

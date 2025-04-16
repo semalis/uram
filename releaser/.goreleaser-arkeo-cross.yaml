@@ -6,12 +6,12 @@ env:
   - CGO_ENABLED=1
 
 builds:
-  - id: arkeod-darwin-amd64
-    binary: arkeod
+  - id: uramd-darwin-amd64
+    binary: uramd
     env:
       - CC=o64-clang
       - CGO_LDFLAGS=-L/lib
-    main: ./cmd/arkeod
+    main: ./cmd/uramd
     goos:
       - darwin
     goarch:
@@ -34,12 +34,12 @@ builds:
     tags:
       - 'mainnet'
 
-  - id: arkeod-darwin-arm64
-    binary: arkeod
+  - id: uramd-darwin-arm64
+    binary: uramd
     env:
       - CC=o64-clang
       - CGO_LDFLAGS=-L/lib
-    main: ./cmd/arkeod
+    main: ./cmd/uramd
     goos:
       - darwin
     goarch:
@@ -62,12 +62,12 @@ builds:
     tags:
       - 'mainnet'
 
-  - id: arkeod-linux-arm64
-    binary: arkeod
+  - id: uramd-linux-arm64
+    binary: uramd
     env:
       - CC=aarch64-linux-gnu-gcc
       - CXX=aarch64-linux-gnu-g++
-    main: ./cmd/arkeod
+    main: ./cmd/uramd
     goos:
       - linux
     goarch:
@@ -88,10 +88,10 @@ builds:
       - 'mainnet'
 
 universal_binaries:
-  - id: arkeod-darwin-universal
+  - id: uramd-darwin-universal
     ids:
-      - arkeod-darwin-amd64
-      - arkeod-darwin-arm64
+      - uramd-darwin-amd64
+      - uramd-darwin-arm64
     replace: false
     name_template: >-
       {{ .ProjectName }}d_{{ .Version }}_darwin_universal
@@ -99,10 +99,10 @@ universal_binaries:
 archives:
   - id: archive-versioned
     builds:
-      - arkeod-linux-arm64
-      - arkeod-darwin-amd64
-      - arkeod-darwin-arm64
-      - arkeod-darwin-universal
+      - uramd-linux-arm64
+      - uramd-darwin-amd64
+      - uramd-darwin-arm64
+      - uramd-darwin-universal
     name_template: >-
       {{ .ProjectName }}d_{{ .Version }}_{{ .Os }}_{{ .Arch }}
     wrap_in_directory: false
@@ -112,10 +112,10 @@ archives:
 
   - id: archive-binary
     builds:
-      - arkeod-linux-arm64
-      - arkeod-darwin-amd64
-      - arkeod-darwin-arm64
-      - arkeod-darwin-universal
+      - uramd-linux-arm64
+      - uramd-darwin-amd64
+      - uramd-darwin-arm64
+      - uramd-darwin-universal
     name_template: >-
       {{ .ProjectName }}d_{{ .Os }}_{{ .Arch }}
     wrap_in_directory: false
@@ -139,7 +139,7 @@ dockers:
       - "--pull"
       - "--platform=linux/arm64"
       - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title=arkeod"
+      - "--label=org.opencontainers.image.title=uramd"
       - "--label=org.opencontainers.image.description=Arkeo Daemon"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"

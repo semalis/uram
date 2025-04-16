@@ -6,7 +6,7 @@ if [ -z "$1" ]; then
 fi
 
 PWD=$(dirname -- "${BASH_SOURCE[0]}")
-BIN="arkeod"
+BIN="uramd"
 TOKEN="uarkeo"
 MODULE="$1"
 

@@ -20,7 +20,7 @@ if ! command -v signhere &>/dev/null; then
 	exit 1
 fi
 
-BIN="arkeod"
+BIN="uramd"
 BIN_TX="arkeo"
 USER="$1"
 CONTRACT_ID="$2"

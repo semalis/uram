@@ -11,7 +11,7 @@ services:
       - -c
       - |
         ./genesis.sh && \
-        arkeod start
+        uramd start
     ports:
       - 1317:1317
       - 26657:26657

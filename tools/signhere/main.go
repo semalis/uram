@@ -35,7 +35,7 @@ func main() {
 
 	buf := bufio.NewReader(os.Stdin)
 
-	kb, err := cKeys.New("arkeod", cKeys.BackendTest, "~/.arkeo", buf, cdc)
+	kb, err := cKeys.New("uramd", cKeys.BackendTest, "~/.arkeo", buf, cdc)
 	if err != nil {
 		log.Fatalf("%v", err)
 	}

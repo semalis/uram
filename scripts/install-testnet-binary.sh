@@ -19,12 +19,12 @@ OS=$(uname -s | tr '[:upper:]' '[:lower:]')
 
 # Set the download URL based on the architecture
 if [[ "$OS" == "darwin" && "$ARCH" == "arm64" ]]; then
-     CHECKSUM_URL="https://github.com/${REPO}/releases/download/${LATEST_VERSION}/arkeod_${LATEST_VERSION}__testnet_cross_checksums.txt"
-    BINARY="arkeod_darwin_arm64-testnet"
+     CHECKSUM_URL="https://github.com/${REPO}/releases/download/${LATEST_VERSION}/uramd_${LATEST_VERSION}__testnet_cross_checksums.txt"
+    BINARY="uramd_darwin_arm64-testnet"
     
 elif [[ "$OS" == "linux" && "$ARCH" == "x86_64" ]]; then
-    CHECKSUM_URL="https://github.com/${REPO}/releases/download/${LATEST_VERSION}/arkeod_${LATEST_VERSION}__testnet_checksums.txt"
-    BINARY="arkeod_linux_amd64-testnet"
+    CHECKSUM_URL="https://github.com/${REPO}/releases/download/${LATEST_VERSION}/uramd_${LATEST_VERSION}__testnet_checksums.txt"
+    BINARY="uramd_linux_amd64-testnet"
     
 else
     echo "Unsupported platform: $OS $ARCH"
@@ -57,19 +57,19 @@ EXPECTED_CHECKSUM=$(grep "$BINARY" checksums.txt |  grep -v '\.zip' | awk '{ pri
 
 if [ "$DOWNLOAD_CHECKSUM" != "$EXPECTED_CHECKSUM" ]; then
     echo "Checksum verification failed. The downloaded binary is corrupted."
-    rm arkeod checksums.txt
+    rm uramd checksums.txt
     exit 1
 fi
 
 echo "Checksum verification passed."
 
 # Copy the binary to /usr/local/bin
-echo "Copying arkeod to ${HOME}/go/bin..."
-cp $BINARY ${HOME}/go/bin/arkeod
+echo "Copying uramd to ${HOME}/go/bin..."
+cp $BINARY ${HOME}/go/bin/uramd
 
 # Set execute permissions
 echo "Setting execute permissions..."
-chmod +x ${HOME}/go/bin/arkeod
+chmod +x ${HOME}/go/bin/uramd
 
 
 # Clean up downloaded binary

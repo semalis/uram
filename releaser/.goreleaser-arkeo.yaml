@@ -6,9 +6,9 @@ env:
   - CGO_ENABLED=1
 
 builds:
-  - id: arkeod-linux-amd64
-    binary: arkeod
-    main: ./cmd/arkeod
+  - id: uramd-linux-amd64
+    binary: uramd
+    main: ./cmd/uramd
     goos:
       - linux
     goarch:
@@ -35,7 +35,7 @@ builds:
 archives:
   - id: archive-versioned
     builds:
-      - arkeod-linux-amd64
+      - uramd-linux-amd64
     name_template: >-
       {{ .ProjectName }}d_{{ .Version }}_{{ .Os }}_{{ .Arch }}
     wrap_in_directory: false
@@ -45,7 +45,7 @@ archives:
 
   - id: archive-binary
     builds:
-      - arkeod-linux-amd64
+      - uramd-linux-amd64
     name_template: >-
       {{ .ProjectName }}d_{{ .Os }}_{{ .Arch }}
     wrap_in_directory: false
@@ -69,7 +69,7 @@ dockers:
       - "--pull"
       - "--platform=linux/amd64"
       - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title=arkeod"
+      - "--label=org.opencontainers.image.title=uramd"
       - "--label=org.opencontainers.image.description=Arkeo Daemon"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"
@@ -88,7 +88,7 @@ dockers:
       - "--pull"
       - "--platform=linux/amd64"
       - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title=arkeod-dev"
+      - "--label=org.opencontainers.image.title=uramd-dev"
       - "--label=org.opencontainers.image.description=Arkeo Daemon Development Build"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"

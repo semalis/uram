@@ -101,7 +101,7 @@ type: create-blocks
 count: 1
 ```
 
-If a specific transaction should cause the process to exit, an optional `exit` parameter will verify `arkeod` exits with the provided code.
+If a specific transaction should cause the process to exit, an optional `exit` parameter will verify `uramd` exits with the provided code.
 
 ## Tips for Writing Tests
 
@@ -141,7 +141,7 @@ EXPORT=1 make test-regression
 
 ### Coverage
 
-We leverage functionality in Golang 1.20 to track code coverage on the `arkeod` binary during live execution. Every run of the regression tests will generate a coverage percentage with archived, versioned, and generated code filtered - the value will be output to the console at the end of the test run. Coverage data is cleared after each run and a convenience target exists to open the coverage data from the last test run in the browser.
+We leverage functionality in Golang 1.20 to track code coverage on the `uramd` binary during live execution. Every run of the regression tests will generate a coverage percentage with archived, versioned, and generated code filtered - the value will be output to the console at the end of the test run. Coverage data is cleared after each run and a convenience target exists to open the coverage data from the last test run in the browser.
 
 ```bash
 make test-regression-coverage

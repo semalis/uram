@@ -16,7 +16,7 @@ if [ -z "$3" ]; then
 fi
 
 PWD=$(dirname -- "${BASH_SOURCE[0]}")
-BIN="arkeod"
+BIN="uramd"
 BIN_TX="arkeo"
 USER="$1"
 BOND="$2"

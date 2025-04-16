@@ -91,15 +91,15 @@ if [ ! -f ~/.arkeo/config/priv_validator_key.json ]; then
 fi
 
 if [ ! -f ~/.arkeo/config/genesis.json ]; then
-	arkeod init local --default-denom $TOKEN --chain-id "$CHAIN_ID"
-	arkeod keys add $USER --keyring-backend test
-	arkeod genesis add-genesis-account $USER $STAKE --keyring-backend test
-	arkeod keys list --keyring-backend test
-	arkeod genesis gentx $USER $STAKE --chain-id $CHAIN_ID --keyring-backend test
-	arkeod genesis collect-gentxs
+	uramd init local --default-denom $TOKEN --chain-id "$CHAIN_ID"
+	uramd keys add $USER --keyring-backend test
+	uramd genesis add-genesis-account $USER $STAKE --keyring-backend test
+	uramd keys list --keyring-backend test
+	uramd genesis gentx $USER $STAKE --chain-id $CHAIN_ID --keyring-backend test
+	uramd genesis collect-gentxs
 
-	arkeod keys add faucet --keyring-backend test
-	FAUCET=$(arkeod keys show faucet -a --keyring-backend test)
+	uramd keys add faucet --keyring-backend test
+	FAUCET=$(uramd keys show faucet -a --keyring-backend test)
 	add_account "$FAUCET" $TOKEN 2900000000000000 # faucet, 29m
 	disable_mint_params
 
@@ -146,7 +146,7 @@ if [ ! -f ~/.arkeo/config/genesis.json ]; then
 	mv /tmp/genesis.json ~/.arkeo/config/genesis.json
 
 	set -e
-	arkeod validate-genesis --trace
+	uramd validate-genesis --trace
 fi
 
-arkeod start --pruning nothing --minimum-gas-prices 0uarkeo
+uramd start --pruning nothing --minimum-gas-prices 0uarkeo

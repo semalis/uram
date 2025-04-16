@@ -4,19 +4,19 @@ services:
   arkeo-node:
     image: ghcr.io/arkeonetwork/arkeo-testnet:latest
     entrypoint:
-      - /usr/bin/arkeod
+      - /usr/bin/uramd
     command:
       - start
       - --pruning
       - nothing
       - --minimum-gas-prices
-      - 0.0001uarkeo
+      - 0.0001uuram
       - --home 
-      - /root/.arkeo
+      - /root/.uram
     ports:
       - 1317:1317
       - 26657:26657
       - 26656:26656
     volumes:
-      - ./arkeo-data:/root/.arkeo/:z
+      - ./uram-data:/root/.uram/:z
       - /tmp:/tmp:z

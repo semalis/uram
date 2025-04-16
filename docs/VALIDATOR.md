@@ -10,7 +10,7 @@ Becoming a validator involves running node and staking arkeo tokens to participa
 
 ## Setting Up Wallet 
 ```shell
-arkeod keys add <your-wallet-name>
+uramd keys add <your-wallet-name>
 ```
 > For the new account balances wont be there if you're running a testnet validator please request tokens from the faucet 
 
@@ -36,13 +36,13 @@ The faucet will send tokens to your wallet for use on the testnet.
 
 ### Check the balances 
 ```shell
-arkeod query bank balances $(arkeod keys show <your-wallet-name> -a)
+uramd query bank balances $(uramd keys show <your-wallet-name> -a)
 ```
 
 ## Create A Validator
 Get your validator public key
 ```shell
-arkeod tendermint show-validator
+uramd tendermint show-validator
 ```
 
 Create a file called "validator.json". Use the template below replacing the validator pubkey with your own, insert your own moniker and optional information
@@ -64,18 +64,18 @@ Create a file called "validator.json". Use the template below replacing the vali
 
 Send your validator creation request to the blockchain
 ```shell
-arkeod tx staking create-validator validator.json --from <your-wallet-name> --chain-id arkeo-testnet-3 --fees="500uarkeo"
+uramd tx staking create-validator validator.json --from <your-wallet-name> --chain-id arkeo-testnet-3 --fees="500uarkeo"
 ```
 
 ## Restart the Service
 Check the node logs 
 ```shell
-journalctl -u arkeod -f -o cat
+journalctl -u uramd -f -o cat
 ```
 
 Restart the Node
 ```shell
-sudo systemctl restart arkeod
+sudo systemctl restart uramd
 ```
 
 Check your node status here;
@@ -93,30 +93,30 @@ curl -s http://127.0.0.1:26657/status | jq .result.sync_info.catching_up
 Get your valoper address:
 
 ```shell
-arkeod keys show wallet --bech val -a
+uramd keys show wallet --bech val -a
 ```
 
 Bond more tokens (if you want to increase your validator stake you should bond more to your valoper address):
 
 ```shell
-arkeod tx staking delegate YOUR_VALOPER_ADDRESS <token amount to stake>uarkeo --from wallet --chain-id $CHAIN_ID --fees="500uarkeo"
+uramd tx staking delegate YOUR_VALOPER_ADDRESS <token amount to stake>uarkeo --from wallet --chain-id $CHAIN_ID --fees="500uarkeo"
 ```
 
 ## Check Validators Status
 Active validators list
 
 ```shell
-arkeod query staking validators -o json | jq -r '.validators[] | select(.status=="BOND_STATUS_BONDED") | [.operator_address, .status, (.tokens|tonumber / pow(10; 8)), .description.moniker] | @csv' | column -t -s"," | sort -k3 -n -r
+uramd query staking validators -o json | jq -r '.validators[] | select(.status=="BOND_STATUS_BONDED") | [.operator_address, .status, (.tokens|tonumber / pow(10; 8)), .description.moniker] | @csv' | column -t -s"," | sort -k3 -n -r
 ```
 Inactive validators list
 
 ```shell
-arkeod query staking validators -o json | jq -r '.validators[] | select(.status=="BOND_STATUS_UNBONDED") | [.operator_address, .status, (.tokens|tonumber / pow(10; 8)), .description.moniker] | @csv' | column -t -s"," | sort -k3 -n -r
+uramd query staking validators -o json | jq -r '.validators[] | select(.status=="BOND_STATUS_UNBONDED") | [.operator_address, .status, (.tokens|tonumber / pow(10; 8)), .description.moniker] | @csv' | column -t -s"," | sort -k3 -n -r
 ```
 
 ## Remove Node:
 ```shell
-systemctl stop arkeod
-sudo systemctl disable arkeod
-sudo rm -rf ~/.arkeod /etc/systemd/system/arkeod.service
+systemctl stop uramd
+sudo systemctl disable uramd
+sudo rm -rf ~/.uramd /etc/systemd/system/uramd.service
 ```

@@ -63,7 +63,7 @@ func run(path string) error {
 
 	// init chain with dog mnemonic
 	log.Debug().Msg("Initializing chain with recovery")
-	cmd := exec.Command("arkeod", "init", "local", "--chain-id", "arkeo", "--default-denom", "uarkeo", "--recover")
+	cmd := exec.Command("uramd", "init", "local", "--chain-id", "arkeo", "--default-denom", "uarkeo", "--recover")
 	cmd.Stdin = bytes.NewBufferString(dogMnemonic + "\n")
 	out, err = cmd.CombinedOutput()
 	if err != nil {
@@ -73,7 +73,7 @@ func run(path string) error {
 
 	// init chain without recovery
 	log.Debug().Msg("Initializing chain")
-	cmd = exec.Command("arkeod", "init", "local", "--chain-id", "arkeo", "--default-denom", "uarkeo", "-o")
+	cmd = exec.Command("uramd", "init", "local", "--chain-id", "arkeo", "--default-denom", "uarkeo", "-o")
 	out, err = cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(string(out))
@@ -213,7 +213,7 @@ func run(path string) error {
 
 	// validate genesis
 	log.Debug().Msg("Validating genesis")
-	cmd = exec.Command("arkeod", "validate-genesis")
+	cmd = exec.Command("uramd", "validate-genesis")
 	out, err = cmd.CombinedOutput()
 	if err != nil {
 		// dump the genesis
@@ -280,8 +280,8 @@ func run(path string) error {
 	}
 	procs := []process{
 		{
-			name:  "arkeod",
-			cmd:   []string{"/regtest/cover-arkeod", "--log_level", logLevel, "start"},
+			name:  "uramd",
+			cmd:   []string{"/regtest/cover-uramd", "--log_level", logLevel, "start"},
 			ports: []string{"8080", "26657"},
 			env: []string{
 				"GOCOVERDIR=/mnt/coverage",

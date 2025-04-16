@@ -27,7 +27,7 @@
     after downloading the executable and corresponding checksum file (right click->save as/link/target), verify the integrity of the downloaded artifact:  
       **Note**: `the examples are using macOS arm64 as the example, substitute your platform as needed.`
       
-      the below will extract arkeod, curleo, and signhere
+      the below will extract uramd, curleo, and signhere
     to /usr/local/bin. replace "-C /usr/local/bin" with a different path if desired.  
 
     change your working directory to the directory you downloaded the archive and checksum files to.
@@ -48,7 +48,7 @@
     tar -C /usr/local/bin -zxvf arkeo_darwin_arm64.tar.gz
     # Output
     curleo
-    arkeod
+    uramd
     signhere
     ```
     if the path you extracted the binaries to in the prior step is not on your PATH (/usr/local/bin generally is on *nix), add the directory to your PATH:
@@ -58,28 +58,28 @@
     /path/to/directory is the directory you extracted the binaries you downloaded to with the tar command above. to make this permanent,
     add the prior `export PATH=...` statement to your shell initialization scripts (.bashrc, .zshrc, etc.)
 
-    verify installation by executing the arkeod command:
+    verify installation by executing the uramd command:
     ```bash
-    arkeod version --long -o json | jq '.commit'
+    uramd version --long -o json | jq '.commit'
     # Output
     "793e955ba9d8d49609bb96fda6c85b0676419b58"
     ```
     update your client config as follows:
     ```bash
-    arkeod config chain-id arkeo
+    uramd config chain-id arkeo
     ```
     ```
-    arkeod config node tcp://testnet-seed.arkeo.shapeshift.com:26657
+    uramd config node tcp://testnet-seed.arkeo.shapeshift.com:26657
     ```
 
     optionally set the backend keyring. the default value "os" uses the operating system's keyring.
     ```bash
-    arkeod config keyring-backend <os|test|file>
+    uramd config keyring-backend <os|test|file>
     ```
 
     you can verify the configuration applied successfully:
     ```bash
-    arkeod config
+    uramd config
     {
       "chain-id": "arkeo",
       "keyring-backend": "os",
@@ -90,7 +90,7 @@
     ```
     -and query the current block height:
     ```
-    arkeod query block | jq -r '.block.header.height'
+    uramd query block | jq -r '.block.header.height'
     205160
     ```
 1. Setup a wallet  
@@ -103,11 +103,11 @@ mnemonic you'd like to use.
     ```
     create a new wallet (keypair)
     ```bash
-    arkeod keys add $ark_user
+    uramd keys add $ark_user
     ```
     `OR` recover an existing wallet from bip39 mnemonic
     ```bash
-    arkeod keys add $ark_user --recover
+    uramd keys add $ark_user --recover
     ```
     This will output your arkeo address and pubkey along with the name you selected, as well as the mnemonic if you opted to generate one. Save this somewhere safe.
 
@@ -120,7 +120,7 @@ mnemonic you'd like to use.
 
     In order to interact with arkeo providers, you will need to have the `Acc` (account) pubkey encoded bech32 with the standard prefix. Execute the command below to obtain it.
     ```bash
-    arkeod debug pubkey-raw $(arkeod keys show $ark_user -p | jq -r '.key') | grep '^Bech32 Acc: ' | awk '{ print $NF }'
+    uramd debug pubkey-raw $(uramd keys show $ark_user -p | jq -r '.key') | grep '^Bech32 Acc: ' | awk '{ print $NF }'
     # Output
     tarkeopub1addwnpepq2tjwwcpqwswatymx7uw3q75sqhljmp0qw3pz2fvnavkv7k2jvknqk25q7j
     ```
@@ -161,11 +161,11 @@ mnemonic you'd like to use.
     ```
     obtain your (spender's) pubkey:
     ```bash
-    ark_pubkey=`arkeod debug pubkey-raw $(arkeod keys show $ark_user -p | jq -r '.key') | grep '^Bech32 Acc: ' | awk '{ print $NF }'`
+    ark_pubkey=`uramd debug pubkey-raw $(uramd keys show $ark_user -p | jq -r '.key') | grep '^Bech32 Acc: ' | awk '{ print $NF }'`
     ```
     open the contract by broadcasting an arkeo open-contract transaction to the chain:
     ```bash
-    arkeod tx arkeo open-contract --from $ark_user -- $ark_provider $ark_service "$ark_pubkey" "$ark_contract_type" "$ark_deposit" "$ark_duration" $ark_rate "$ark_settle_duration"
+    uramd tx arkeo open-contract --from $ark_user -- $ark_provider $ark_service "$ark_pubkey" "$ark_contract_type" "$ark_deposit" "$ark_duration" $ark_rate "$ark_settle_duration"
     ```
     if things went well, the last line of output will be the txhash:
     ```bash
@@ -173,13 +173,13 @@ mnemonic you'd like to use.
     ```
     check the status of your open-contract tx:
     ```bash
-    arkeod query tx -o json --type=hash 0B0AB5F982BFBB50E7518B114E02AF37D6A08E4E555FB47048461A632B1D0AC3 | jq '.code'
+    uramd query tx -o json --type=hash 0B0AB5F982BFBB50E7518B114E02AF37D6A08E4E555FB47048461A632B1D0AC3 | jq '.code'
     # Output
     0
     ```
     if the output is anything besides `0`, the tx didn't complete successfully. check the tx's raw_log:
     ```bash
-    arkeod query tx -o json --type=hash 813A6B9A761F5A26E32EAECE5AFE73ED9D383D61C289AF515BC8D438B522883E | jq '.raw_log'
+    uramd query tx -o json --type=hash 813A6B9A761F5A26E32EAECE5AFE73ED9D383D61C289AF515BC8D438B522883E | jq '.raw_log'
     # Output
     "failed to execute message; message index: 0: expires in 7 blocks: contract is already open"
     ```
@@ -195,11 +195,11 @@ mnemonic you'd like to use.
     ```
     obtain your (spender's) pubkey:
     ```bash
-    ark_pubkey=`arkeod debug pubkey-raw $(arkeod keys show $ark_user -p | jq -r '.key') | grep '^Bech32 Acc: ' | awk '{ print $NF }'`
+    ark_pubkey=`uramd debug pubkey-raw $(uramd keys show $ark_user -p | jq -r '.key') | grep '^Bech32 Acc: ' | awk '{ print $NF }'`
     ```
     open the contract by broadcasting an arkeo open-contract transaction to the chain:
     ```bash
-    arkeod tx arkeo open-contract --from $ark_user -- $ark_provider $ark_service "$ark_pubkey" "$ark_contract_type" "$ark_deposit" "$ark_duration" $ark_rate "$ark_settle_duration"
+    uramd tx arkeo open-contract --from $ark_user -- $ark_provider $ark_service "$ark_pubkey" "$ark_contract_type" "$ark_deposit" "$ark_duration" $ark_rate "$ark_settle_duration"
     ```
 1. Make Requests  
 Use arkeo's `curleo` command to subchain rpc requests to the GAIA node:
@@ -231,16 +231,16 @@ On the provider’s behalf, you can claim the rewards for them (for testing purp
     ```
     obtain your (spender's) pubkey:
     ```bash
-    ark_spender=$(arkeod debug pubkey-raw $(arkeod keys show $ark_user -p | jq -r .key) | grep "Bech32 Acc" | awk '{ print $NF }')
+    ark_spender=$(uramd debug pubkey-raw $(uramd keys show $ark_user -p | jq -r .key) | grep "Bech32 Acc" | awk '{ print $NF }')
     ```
     obtain the active contract id
     ```bash
-    ark_contract_id=$(arkeod query arkeo active-contract -o json $ark_spender $ark_provider $ark_service | jq -r '.contract.id')
+    ark_contract_id=$(uramd query arkeo active-contract -o json $ark_spender $ark_provider $ark_service | jq -r '.contract.id')
     ```
     use arkeo's `signhere` command to sign the authorization which must accompany paid tier requests
     ```bash
     ark_sig=$(signhere -u $ark_user -m "$ark_contract_id:$ark_spender:$ark_nonce")
-    arkeod tx arkeo claim-contract-income --from $ark_user -- $ark_contract_id $ark_spender $ark_nonce $ark_sig
+    uramd tx arkeo claim-contract-income --from $ark_user -- $ark_contract_id $ark_spender $ark_nonce $ark_sig
     ```
 
 1. Close a Contract
@@ -248,13 +248,13 @@ Subscription contracts can be cancelled. Pay-as-you-go isn’t available to canc
 assign service and obtain our (spender's) pubkey
 ```bash
 ark_service=gaia-mainnet-rpc-archive
-ark_spender=$(arkeod debug pubkey-raw $(arkeod keys show $ark_user -p | jq -r .key) | grep "Bech32 Acc" | awk '{ print $NF }')
+ark_spender=$(uramd debug pubkey-raw $(uramd keys show $ark_user -p | jq -r .key) | grep "Bech32 Acc" | awk '{ print $NF }')
 ```
 obtain the active contract id
 ```bash
-ark_contract_id=$(arkeod query arkeo active-contract -o json $ark_spender $ark_provider $ark_service | jq -r '.contract.id')
+ark_contract_id=$(uramd query arkeo active-contract -o json $ark_spender $ark_provider $ark_service | jq -r '.contract.id')
 ```
 broadcast the arkeo close-contract transaction to the chain:
 ```bash
-arkeod tx arkeo close-contract --from $ark_user -- $contract_id
+uramd tx arkeo close-contract --from $ark_user -- $contract_id
 ```

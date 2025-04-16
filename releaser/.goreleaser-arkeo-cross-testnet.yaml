@@ -6,12 +6,12 @@ env:
   - CGO_ENABLED=1
 
 builds:
-  - id: arkeod-testnet-darwin-amd64
-    binary: arkeod
+  - id: uramd-testnet-darwin-amd64
+    binary: uramd
     env:
       - CC=o64-clang
       - CGO_LDFLAGS=-L/lib
-    main: ./cmd/arkeod
+    main: ./cmd/uramd
     goos:
       - darwin
     goarch:
@@ -34,12 +34,12 @@ builds:
     tags:
       - 'testnet'
 
-  - id: arkeod-testnet-darwin-arm64
-    binary: arkeod
+  - id: uramd-testnet-darwin-arm64
+    binary: uramd
     env:
       - CC=o64-clang
       - CGO_LDFLAGS=-L/lib
-    main: ./cmd/arkeod
+    main: ./cmd/uramd
     goos:
       - darwin
     goarch:
@@ -62,12 +62,12 @@ builds:
     tags:
       - 'testnet'
 
-  - id: arkeod-testnet-linux-arm64
-    binary: arkeod
+  - id: uramd-testnet-linux-arm64
+    binary: uramd
     env:
       - CC=aarch64-linux-gnu-gcc
       - CXX=aarch64-linux-gnu-g++
-    main: ./cmd/arkeod
+    main: ./cmd/uramd
     goos:
       - linux
     goarch:
@@ -88,23 +88,23 @@ builds:
       - 'testnet'
 
 universal_binaries:
-  - id: arkeod-testnet-darwin-universal
+  - id: uramd-testnet-darwin-universal
     ids:
-      - arkeod-testnet-darwin-amd64
-      - arkeod-testnet-darwin-arm64
+      - uramd-testnet-darwin-amd64
+      - uramd-testnet-darwin-arm64
     replace: false
     name_template: >-
-      arkeod_{{ .Version }}_darwin_universal_testnet
+      uramd_{{ .Version }}_darwin_universal_testnet
 
 archives:
   - id: archive-versioned
     builds:
-      - arkeod-testnet-linux-arm64
-      - arkeod-testnet-darwin-amd64
-      - arkeod-testnet-darwin-arm64
-      - arkeod-testnet-darwin-universal
+      - uramd-testnet-linux-arm64
+      - uramd-testnet-darwin-amd64
+      - uramd-testnet-darwin-arm64
+      - uramd-testnet-darwin-universal
     name_template: >-
-      arkeod_{{ .Version }}_{{ .Os }}_{{ .Arch }}_testnet
+      uramd_{{ .Version }}_{{ .Os }}_{{ .Arch }}_testnet
     wrap_in_directory: false
     format: zip
     files:
@@ -112,12 +112,12 @@ archives:
 
   - id: archive-binary
     builds:
-      - arkeod-testnet-linux-arm64
-      - arkeod-testnet-darwin-amd64
-      - arkeod-testnet-darwin-arm64
-      - arkeod-testnet-darwin-universal
+      - uramd-testnet-linux-arm64
+      - uramd-testnet-darwin-amd64
+      - uramd-testnet-darwin-arm64
+      - uramd-testnet-darwin-universal
     name_template: >-
-      arkeod_{{ .Os }}_{{ .Arch }}_testnet
+      uramd_{{ .Os }}_{{ .Arch }}_testnet
     wrap_in_directory: false
     format: binary
     files:
@@ -125,7 +125,7 @@ archives:
 
 checksum:
   name_template: >-
-    arkeod_{{ .Version }}_cross_testnet_checksums.txt
+    uramd_{{ .Version }}_cross_testnet_checksums.txt
 
 dockers:
   - use: buildx
@@ -139,7 +139,7 @@ dockers:
       - "--pull"
       - "--platform=linux/arm64"
       - "--label=org.opencontainers.image.created={{.Date}}"
-      - "--label=org.opencontainers.image.title=arkeod-testnet"
+      - "--label=org.opencontainers.image.title=uramd-testnet"
       - "--label=org.opencontainers.image.description=Arkeo Daemon Testnet"
       - "--label=org.opencontainers.image.revision={{.FullCommit}}"
       - "--label=org.opencontainers.image.version={{.Version}}"

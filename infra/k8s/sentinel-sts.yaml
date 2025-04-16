@@ -40,13 +40,13 @@ spec:
               memory: 2Gi
           volumeMounts:
             - mountPath: "/root/.arkeo"
-              name: sentinel-arkeod-volume-claim
+              name: sentinel-uramd-volume-claim
           ports:
             - containerPort: 3636
               name: api
   volumeClaimTemplates:
     - metadata:
-        name: sentinel-arkeod-volume-claim
+        name: sentinel-uramd-volume-claim
       spec:
         accessModes:
           - ReadWriteOnce
