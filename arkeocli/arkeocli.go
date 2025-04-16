@@ -6,8 +6,8 @@ import (
 
 func GetArkeoCmd() *cobra.Command {
 	arkeoCmd := &cobra.Command{
-		Use:   "arkeo",
-		Short: "arkeo subcommands",
+		Use:   "uram",
+		Short: "uram subcommands",
 	}
 	arkeoCmd.AddCommand(newBondProviderCmd())
 	arkeoCmd.AddCommand(newModProviderCmd())
