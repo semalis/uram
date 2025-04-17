@@ -1,5 +1,5 @@
 version: v1
-name: buf.build/arkeo/arkeo
+name: buf.build/uram/uram
 deps:
   - buf.build/protocolbuffers/wellknowntypes
   - buf.build/cosmos/cosmos-sdk

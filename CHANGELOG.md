@@ -48,7 +48,7 @@ Contains all the PRs that improved the code without changing the behaviors.
 - Fixed validator rewards payout.
 - Fixed bug allowing double claims with Thorchain claims.
 - Fixed non deterministic map iteration to sorted iteration 
-- Fixed fee stuck in arkeo module by moving fees to arkeo-reserve
+- Fixed fee stuck in uram module by moving fees to uram-reserve
 - Fixed signature replay on different network
 - Fixed informational issues
 - Fixed claim validation

@@ -1,7 +1,7 @@
 version: "3"
 
 services:
-  arkeo-node:
+  uram-node:
     image: ghcr.io/arkeonetwork/arkeo-testnet:latest
     entrypoint:
       - /usr/bin/uramd

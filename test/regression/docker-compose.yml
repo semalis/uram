@@ -1,9 +1,9 @@
 version: "3.6"
 services:
-  arkeo:
-    hostname: arkeo
-    container_name: arkeo
-    image: arkeo-regtest
+  uram:
+    hostname: uram
+    container_name: uram
+    image: uram-regtest
     build:
       context: ../..
       dockerfile: ./test/regression/Dockerfile
