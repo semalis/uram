@@ -11,7 +11,7 @@ genesis:
   app_state:
     staking:
       params:
-        bond_denom: "uarkeo"
+        bond_denom: "uuram"
     claimarkeo:
       module_account_balance:
         denom: ''
@@ -20,7 +20,7 @@ genesis:
         airdrop_start_time: '2024-08-27T04:35:10.833785853Z'
         duration_until_decay: 7884000s
         duration_of_decay: 7884000s
-        claim_denom: uarkeo
+        claim_denom: uuram
         initial_gas_amount: 
       claim_records:
         - chain: ARKEO

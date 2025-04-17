@@ -63,7 +63,7 @@ func run(path string) error {
 
 	// init chain with dog mnemonic
 	log.Debug().Msg("Initializing chain with recovery")
-	cmd := exec.Command("uramd", "init", "local", "--chain-id", "arkeo", "--default-denom", "uarkeo", "--recover")
+	cmd := exec.Command("uramd", "init", "local", "--chain-id", "arkeo", "--default-denom", "uuram", "--recover")
 	cmd.Stdin = bytes.NewBufferString(dogMnemonic + "\n")
 	out, err = cmd.CombinedOutput()
 	if err != nil {
