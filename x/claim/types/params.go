@@ -9,7 +9,7 @@ import (
 
 var (
 	KeyClaimDenom            = []byte("ClaimDenom")
-	DefaultClaimDenom string = "uarkeo"
+	DefaultClaimDenom string = "uuram"
 )
 
 var (

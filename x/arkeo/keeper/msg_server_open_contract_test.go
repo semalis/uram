@@ -32,9 +32,9 @@ func TestOpenContractValidate(t *testing.T) {
 
 	service := common.BTCService
 
-	sRates, err := cosmos.ParseCoins("15uarkeo,20uatom")
+	sRates, err := cosmos.ParseCoins("15uuram,20uatom")
 	require.NoError(t, err)
-	pRates, err := cosmos.ParseCoins("2uarkeo")
+	pRates, err := cosmos.ParseCoins("2uuram")
 	require.NoError(t, err)
 
 	provider := types.NewProvider(providerPubkey, service)
@@ -75,7 +75,7 @@ func TestOpenContractValidate(t *testing.T) {
 	msg.Rate = cosmos.NewInt64Coin("bogus", 10)
 	err = s.OpenContractValidate(ctx, &msg)
 	require.ErrorIs(t, err, types.ErrOpenContractMismatchRate)
-	msg.Rate = cosmos.NewInt64Coin("uarkeo", 10)
+	msg.Rate = cosmos.NewInt64Coin("uuram", 10)
 	err = s.OpenContractValidate(ctx, &msg)
 	require.ErrorIs(t, err, types.ErrOpenContractMismatchRate)
 	msg.Rate = cosmos.NewInt64Coin("uatom", 10)
@@ -84,7 +84,7 @@ func TestOpenContractValidate(t *testing.T) {
 	msg.ContractType = types.ContractType_PAY_AS_YOU_GO
 	err = s.OpenContractValidate(ctx, &msg)
 	require.ErrorIs(t, err, types.ErrOpenContractMismatchRate)
-	msg.Rate = cosmos.NewInt64Coin("uarkeo", 15)
+	msg.Rate = cosmos.NewInt64Coin("uuram", 15)
 	msg.ContractType = types.ContractType_SUBSCRIPTION
 
 	provider.Bond = cosmos.NewInt(1)
@@ -125,7 +125,7 @@ func TestOpenContractHandle(t *testing.T) {
 		Client:           pubkey.String(),
 		ContractType:     types.ContractType_PAY_AS_YOU_GO,
 		Duration:         100,
-		Rate:             cosmos.NewInt64Coin("uarkeo", 15),
+		Rate:             cosmos.NewInt64Coin("uuram", 15),
 		Deposit:          cosmos.NewInt(1000),
 		QueriesPerMinute: 1,
 	}
@@ -174,7 +174,7 @@ func TestOpenContract(t *testing.T) {
 	provider.LastUpdate = ctx.BlockHeight()
 	require.NoError(t, k.SetProvider(ctx, provider))
 
-	rates, err := cosmos.ParseCoins("15uarkeo")
+	rates, err := cosmos.ParseCoins("15uuram")
 	require.NoError(t, err)
 
 	creatorAddress := types.GetRandomBech32Addr()
@@ -200,7 +200,7 @@ func TestOpenContract(t *testing.T) {
 		Client:       providerPubKey.String(),
 		ContractType: types.ContractType_PAY_AS_YOU_GO,
 		Duration:     100,
-		Rate:         cosmos.NewInt64Coin("uarkeo", 15),
+		Rate:         cosmos.NewInt64Coin("uuram", 15),
 		Deposit:      cosmos.NewInt(1500),
 	}
 	_, err = s.OpenContract(ctx, &msg)
@@ -223,7 +223,7 @@ func TestOpenContract(t *testing.T) {
 		Client:       clientPubKey.String(),
 		ContractType: types.ContractType_PAY_AS_YOU_GO,
 		Duration:     100,
-		Rate:         cosmos.NewInt64Coin("uarkeo", 15),
+		Rate:         cosmos.NewInt64Coin("uuram", 15),
 		Deposit:      cosmos.NewInt(1000),
 	}
 	require.NoError(t, k.MintAndSendToAccount(ctx, clientAddress, getCoin(common.Tokens(10))))
@@ -263,7 +263,7 @@ func TestOpenContractWithSettlementPeriod(t *testing.T) {
 	provider.LastUpdate = ctx.BlockHeight()
 	require.NoError(t, k.SetProvider(ctx, provider))
 
-	rates, err := cosmos.ParseCoins("15uarkeo")
+	rates, err := cosmos.ParseCoins("15uuram")
 	require.NoError(t, err)
 	creatorAddress := types.GetRandomBech32Addr()
 
@@ -306,7 +306,7 @@ func TestOpenContractWithSettlementPeriod(t *testing.T) {
 		Client:       clientPubKey.String(),
 		ContractType: types.ContractType_PAY_AS_YOU_GO,
 		Duration:     100,
-		Rate:         cosmos.NewInt64Coin("uarkeo", 15),
+		Rate:         cosmos.NewInt64Coin("uuram", 15),
 		Deposit:      cosmos.NewInt(1500),
 	}
 	_, err = s.OpenContract(ctx, &msg)

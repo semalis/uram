@@ -23,7 +23,7 @@ cd ..
 # uses nodejs package `swagger-combine`.
 # all the individual swagger files need to be configured in `config.json` for merging
 
-arkeoTemplate="{arkeo-version}"
+arkeoTemplate="{uram-version}"
 arkeoVersion=$(echo $(git describe --tags) | sed 's/^v//')
 sed "s/$arkeoTemplate/$arkeoVersion/g" ./docs/proto/config.json > ./tmp-swagger-gen/config.json
 

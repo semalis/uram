@@ -6,7 +6,7 @@ if [ -z "$1" ]; then
 fi
 
 BIN="uramd"
-TOKEN="uarkeo"
+TOKEN="uuram"
 USER="$1"
 
 ADDRESS=$($BIN keys show "$USER" -a --keyring-backend test)

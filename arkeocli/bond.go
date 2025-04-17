@@ -65,7 +65,7 @@ func runBondProviderCmd(cmd *cobra.Command, args []string) (err error) {
 
 	argBond, _ := cmd.Flags().GetString("bond")
 	if argBond == "" {
-		argBond, err = promptForArg(cmd, "Specify bond amount (e.g. 100uarkeo, negative to unbond): ")
+		argBond, err = promptForArg(cmd, "Specify bond amount (e.g. 100uuram, negative to unbond): ")
 		if err != nil {
 			return err
 		}
@@ -108,8 +108,8 @@ func parseBondAmount(bondStr string) (amount cosmos.Int, err error) {
 		break
 	}
 	bondDenom := bondStr[i:]
-	if bondDenom != "uarkeo" {
-		err = fmt.Errorf("bad bond denom, expected \"uarkeo\" got \"%s\"", bondDenom)
+	if bondDenom != "uuram" {
+		err = fmt.Errorf("bad bond denom, expected \"uuram\" got \"%s\"", bondDenom)
 		return
 	}
 

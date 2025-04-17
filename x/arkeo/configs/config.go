@@ -13,7 +13,7 @@ var (
 	GitCommit             = "null" // sha1 revision used to build the program
 	BuildTime             = "null" // when the executable was built
 	Version               = "1"    // software version
-	Denom                 = "uarkeo"
+	Denom                 = "uuram"
 	MaxBasisPoints  int64 = 10_000
 	int64Overrides        = map[ConfigName]int64{}
 	boolOverrides         = map[ConfigName]bool{}

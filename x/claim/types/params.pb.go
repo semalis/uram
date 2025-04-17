@@ -37,7 +37,7 @@ type Params struct {
 	DurationOfDecay    time.Duration `protobuf:"bytes,3,opt,name=duration_of_decay,json=durationOfDecay,proto3,stdduration" json:"duration_of_decay,omitempty" yaml:"duration_of_decay"`
 	// denom of claimable asset
 	ClaimDenom string `protobuf:"bytes,4,opt,name=claim_denom,json=claimDenom,proto3" json:"claim_denom,omitempty"`
-	// uarkeo to distribute to arkeo account for gas to make claiming easier
+	// uuram to distribute to arkeo account for gas to make claiming easier
 	InitialGasAmount *types.Coin `protobuf:"bytes,5,opt,name=initial_gas_amount,json=initialGasAmount,proto3" json:"initial_gas_amount,omitempty" yaml:"initial_gas_amount"`
 }
 

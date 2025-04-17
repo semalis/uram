@@ -19,7 +19,7 @@ queries_per_minute: 1
 settlement_duration: 11
 duration: 10
 rate:
-  denom: "uarkeo"
+  denom: "uuram"
   amount: "10"
 deposit: "100"
 ---
@@ -55,7 +55,7 @@ asserts:
   - .queries_per_minute == 1
   - .settlement_duration == 11
   - .rate.amount == "10"
-  - .rate.denom == "uarkeo"
+  - .rate.denom == "uuram"
   - .provider == "{{ pubkey_fox }}"
   - .service == "mock"
 ---
@@ -64,7 +64,7 @@ description: cat account balance should decrease
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_cat }}
 asserts:
   - .balances|length == 1
-  - .balances[]|select(.denom == "uarkeo")|.amount|tonumber == 999999899999900
+  - .balances[]|select(.denom == "uuram")|.amount|tonumber == 999999899999900
 ---
 ########################################################################################
 # check can make a paid request
@@ -101,7 +101,7 @@ description: fox account balance should increase
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_fox }}
 asserts:
   - .balances|length == 1
-  - .balances[]|select(.denom == "uarkeo")|.amount|tonumber == 1000000000000090 # fox gets 90 due to 10% tax to reserve
+  - .balances[]|select(.denom == "uuram")|.amount|tonumber == 1000000000000090 # fox gets 90 due to 10% tax to reserve
 ---
 type: check
 description: check that contract is in directory service
@@ -129,7 +129,7 @@ queries_per_minute: 1
 settlement_duration: 11
 duration: 5
 rate:
-  denom: "uarkeo"
+  denom: "uuram"
   amount: "10"
 deposit: "50"
 authorization: "OPEN"
@@ -209,7 +209,7 @@ description: fox account balance should increase
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_fox }}
 asserts:
   - .balances|length == 1
-  - .balances[]|select(.denom == "uarkeo")|.amount|tonumber == 1000000000000108
+  - .balances[]|select(.denom == "uuram")|.amount|tonumber == 1000000000000108
 ---
 type: check
 description: ensure contract is closed

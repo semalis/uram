@@ -7,7 +7,7 @@ fi
 
 PWD=$(dirname -- "${BASH_SOURCE[0]}")
 BIN="uramd"
-TOKEN="uarkeo"
+TOKEN="uuram"
 MODULE="$1"
 
 ADDRESS=$($BIN query auth module-accounts -o json | jq -r ".accounts[] | select(.name==\"$MODULE\") | .base_account.address")

@@ -44,10 +44,10 @@ func TestInsertProvider(t *testing.T) {
 		MaxContractDuration: 1000,
 		SettlementDuration:  10,
 		SubscriptionRate: []cosmostypes.Coin{
-			cosmostypes.NewCoin("uarkeo", math.NewInt(10)),
+			cosmostypes.NewCoin("uuram", math.NewInt(10)),
 		},
 		PayAsYouGoRate: []cosmostypes.Coin{
-			cosmostypes.NewCoin("uarkeo", math.NewInt(10)),
+			cosmostypes.NewCoin("uuram", math.NewInt(10)),
 		},
 	}
 	p.Bond = "whatever"
@@ -95,10 +95,10 @@ func TestUpdateProvider(t *testing.T) {
 		MaxContractDuration: 1000,
 		SettlementDuration:  10,
 		SubscriptionRate: []cosmostypes.Coin{
-			cosmostypes.NewCoin("uarkeo", math.NewInt(10)),
+			cosmostypes.NewCoin("uuram", math.NewInt(10)),
 		},
 		PayAsYouGoRate: []cosmostypes.Coin{
-			cosmostypes.NewCoin("uarkeo", math.NewInt(10)),
+			cosmostypes.NewCoin("uuram", math.NewInt(10)),
 		},
 	}
 	m.ExpectBegin().WillReturnError(fmt.Errorf("fail to begin tx"))
@@ -150,13 +150,13 @@ func TestFindProvider(t *testing.T) {
 		WithArgs(int64(1)).
 		WillReturnRows(
 			pgxmock.NewRows([]string{"id", "provider_id", "token_name", "token_amount"}).
-				AddRow(int64(1), int64(1), "uarkeo", int64(100)),
+				AddRow(int64(1), int64(1), "uuram", int64(100)),
 		)
 	m.ExpectQuery("SELECT.*FROM provider_pay_as_you_go_rates.*").
 		WithArgs(int64(1)).
 		WillReturnRows(
 			pgxmock.NewRows([]string{"id", "provider_id", "token_name", "token_amount"}).
-				AddRow(int64(1), int64(1), "uarkeo", int64(100)),
+				AddRow(int64(1), int64(1), "uuram", int64(100)),
 		)
 	p, err := db.FindProvider(context.Background(), testPubKey.String(), "mock")
 	assert.Nil(t, err)
@@ -230,10 +230,10 @@ func TestInsertModProviderEvent(t *testing.T) {
 		MaxContractDuration: 1000,
 		SettlementDuration:  10,
 		SubscriptionRate: []cosmostypes.Coin{
-			cosmostypes.NewCoin("uarkeo", math.NewInt(10)),
+			cosmostypes.NewCoin("uuram", math.NewInt(10)),
 		},
 		PayAsYouGoRate: []cosmostypes.Coin{
-			cosmostypes.NewCoin("uarkeo", math.NewInt(10)),
+			cosmostypes.NewCoin("uuram", math.NewInt(10)),
 		},
 	}
 	m.ExpectQuery("insert into provider_mod_events.*").

@@ -15,7 +15,7 @@ endif
 
 # compiler flags
 IMAGE="uram"
-PROJECT_NAME= arkeo
+PROJECT_NAME= uram
 DOCKER := $(shell which docker)
 NOW=$(shell date +'%Y-%m-%d_%T')
 COMMIT:=$(shell git log -1 --format='%H')

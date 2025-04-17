@@ -28,19 +28,19 @@ genesis:
         - address: {{ addr_dog }}
           coins:
             - amount: "50000000000000000"
-              denom: uarkeo
+              denom: uuram
         - address: {{ addr_cat }}
           coins:
             - amount: "1000000000000000"
-              denom: uarkeo
+              denom: uuram
         - address: {{ addr_fox }}
           coins:
             - amount: "1000000000000000"
-              denom: uarkeo
+              denom: uuram
         - address: {{ addr_pig }}
           coins:
             - amount: "100"
-              denom: uarkeo
+              denom: uuram
     genutil:
       gen_txs:
         - auth_info:
@@ -81,7 +81,7 @@ genesis:
                 validator_address: tarkeovaloper1hnyy4gp5tgarpg3xu6w5cw4zsyphx2lyfn54sh
                 value:
                   amount: "50000000000000000"
-                  denom: uarkeo
+                  denom: uuram
             non_critical_extension_options: []
             timeout_height: "0"
           signatures:

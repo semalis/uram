@@ -19,7 +19,7 @@ queries_per_minute: 1
 settlement_duration: 11
 duration: 10
 rate:
-  denom: "uarkeo"
+  denom: "uuram"
   amount: "3"
 deposit: "100"
 ---
@@ -62,7 +62,7 @@ description: cat account balance should decrease
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_cat }}
 asserts:
   - .balances|length == 1
-  - .balances[]|select(.denom == "uarkeo")|.amount|tonumber == 999999899999900
+  - .balances[]|select(.denom == "uuram")|.amount|tonumber == 999999899999900
 ---
 ########################################################################################
 # check can make a paid request
@@ -121,14 +121,14 @@ description: fox account balance should NOT increase
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_fox }}
 asserts:
   - .balances|length == 1
-  - .balances[]|select(.denom == "uarkeo")|.amount|tonumber == 1000000000000000
+  - .balances[]|select(.denom == "uuram")|.amount|tonumber == 1000000000000000
 ---
 type: check
 description: cat account balance should NOT increase
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_cat }}
 asserts:
   - .balances|length == 1
-  - .balances[]|select(.denom == "uarkeo")|.amount|tonumber == 999999899999900
+  - .balances[]|select(.denom == "uuram")|.amount|tonumber == 999999899999900
 ---
 type: check
 description: ensure contract is closed
@@ -176,7 +176,7 @@ description: cat account balance should decrease
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_fox }}
 asserts:
   - .balances|length == 1
-  - .balances[]|select(.denom == "uarkeo")|.amount|tonumber == 1000000000000003
+  - .balances[]|select(.denom == "uuram")|.amount|tonumber == 1000000000000003
 ---
 ########################################################################################
 # query open claims on sentinel, ensure its now "claimed"
@@ -216,7 +216,7 @@ description: cat account balance should NOT decrease
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_fox }}
 asserts:
   - .balances|length == 1
-  - .balances[]|select(.denom == "uarkeo")|.amount|tonumber == 1000000000000003
+  - .balances[]|select(.denom == "uuram")|.amount|tonumber == 1000000000000003
 ---
 ########################################################################################
 # ensure contract is settled
@@ -229,14 +229,14 @@ description: fox account balance should NOT increase
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_fox }}
 asserts:
   - .balances|length == 1
-  - .balances[]|select(.denom == "uarkeo")|.amount|tonumber == 1000000000000003
+  - .balances[]|select(.denom == "uuram")|.amount|tonumber == 1000000000000003
 ---
 type: check
 description: cat account balance should increase
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_cat }}
 asserts:
   - .balances|length == 1
-  - .balances[]|select(.denom == "uarkeo")|.amount|tonumber == 999999899999997
+  - .balances[]|select(.denom == "uuram")|.amount|tonumber == 999999899999997
 ---
 type: check
 description: ensure contract is closed

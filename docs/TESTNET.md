@@ -80,7 +80,7 @@ curl -s http://seed31.innovationtheory.com:26657/genesis | jq '.result.genesis' 
    sed -i -e "s/^pruning *=.*/pruning = \"custom\"/" $HOME/.arkeo/config/app.toml
    sed -i -e "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME/.arkeo/config/app.toml
    sed -i -e "s/^pruning-interval *=.*/pruning-interval = \"50\"/" $HOME/.arkeo/config/app.toml
-   sed -i 's|minimum-gas-prices =.*|minimum-gas-prices = "0.001uarkeo"|g' $HOME/.arkeo/config/app.toml
+   sed -i 's|minimum-gas-prices =.*|minimum-gas-prices = "0.001uuram"|g' $HOME/.arkeo/config/app.toml
    sed -i 's|swagger =.*| swagger = true|g' $HOME/.arkeo/config/app.toml
    ```
 
@@ -137,4 +137,4 @@ curl -s http://seed31.innovationtheory.com:26657/genesis | jq '.result.genesis' 
 ---
 
 > For any interface or dashboard calculations:
-       **1 arkeo = 100,000,000 uarkeo**
+       **1 arkeo = 100,000,000 uuram**

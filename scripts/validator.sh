@@ -36,12 +36,12 @@ if [ ! -f ~/.arkeo/config/genesis.json ]; then
 	sed -i -e  "s/^pruning *=.*/pruning = \"custom\"/" $HOME/.arkeo/config/app.toml
    	sed -i -e  "s/^pruning-keep-recent *=.*/pruning-keep-recent = \"100\"/" $HOME/.arkeo/config/app.toml
    	sed -i -e  "s/^pruning-interval *=.*/pruning-interval = \"50\"/" $HOME/.arkeo/config/app.toml
-   	sed -i -e  "s|^minimum-gas-prices =.*|minimum-gas-prices = \"0.001uarkeo\"|g" $HOME/.arkeo/config/app.toml
+   	sed -i -e  "s|^minimum-gas-prices =.*|minimum-gas-prices = \"0.001uuram\"|g" $HOME/.arkeo/config/app.toml
    	sed -i -e  "s|swagger =.*| swagger = true|g" $HOME/.arkeo/config/app.toml
 	sed -i -e  "s/seeds = \"\"/seeds = \"$PEER_ID@$SEED\"/g" ~/.arkeo/config/config.toml
 
 	# TODO: create this one as a validator
-	# uramd tx staking create-validator --chain-id arkeo --commission-rate 0.05 --commission-max-rate 0.2 --commission-max-change-rate 0.1 --min-self-delegation "1" --amount <staking amount>uarkeo --pubkey $(uramd tendermint show-validator) --moniker "<yourvalidator-name>" --from <your-wallet-name> --fees="5000uarkeo" --yes
+	# uramd tx staking create-validator --chain-id arkeo --commission-rate 0.05 --commission-max-rate 0.2 --commission-max-change-rate 0.1 --min-self-delegation "1" --amount <staking amount>uuram --pubkey $(uramd tendermint show-validator) --moniker "<yourvalidator-name>" --from <your-wallet-name> --fees="5000uuram" --yes
 fi
 
 uramd start

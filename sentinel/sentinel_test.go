@@ -20,7 +20,7 @@ func setUpTest(t *testing.T, pk1, pk2 common.PubKey) *httptest.Server {
 	return httptest.NewServer(http.HandlerFunc(func(rw http.ResponseWriter, req *http.Request) {
 		switch {
 		case strings.HasPrefix(req.RequestURI, "/arkeo/active-contract/"):
-			httpTestHandler(t, rw, fmt.Sprintf(`{"provider":"%s","service":10,"client":"%s","type":1,"height":100,"duration":100,"rate":{"denom":"uarkeo","amount":"1"},"deposit":"100","paid":"0","id":1,"settlement_duration":10,"queries_per_minute":100}`, pk1, pk2))
+			httpTestHandler(t, rw, fmt.Sprintf(`{"provider":"%s","service":10,"client":"%s","type":1,"height":100,"duration":100,"rate":{"denom":"uuram","amount":"1"},"deposit":"100","paid":"0","id":1,"settlement_duration":10,"queries_per_minute":100}`, pk1, pk2))
 		default:
 			panic(fmt.Sprintf("could not serve request: %s", req.RequestURI))
 		}
@@ -39,7 +39,7 @@ func TestHandleActiveContract(t *testing.T) {
 		Type:               types.ContractType_PAY_AS_YOU_GO,
 		Height:             100,
 		Duration:           100,
-		Rate:               cosmos.NewInt64Coin("uarkeo", 1),
+		Rate:               cosmos.NewInt64Coin("uuram", 1),
 		Deposit:            cosmos.NewInt(100),
 		Nonce:              0,
 		Id:                 1,
@@ -95,7 +95,7 @@ func TestHandleClaim(t *testing.T) {
 		Type:               types.ContractType_PAY_AS_YOU_GO,
 		Height:             100,
 		Duration:           100,
-		Rate:               cosmos.NewInt64Coin("uarkeo", 1),
+		Rate:               cosmos.NewInt64Coin("uuram", 1),
 		Deposit:            cosmos.NewInt(100),
 		Nonce:              0,
 		Id:                 150,
@@ -164,7 +164,7 @@ func TestHandleOpenClaims(t *testing.T) {
 		Type:               types.ContractType_PAY_AS_YOU_GO,
 		Height:             100,
 		Duration:           100,
-		Rate:               cosmos.NewInt64Coin("uarkeo", 1),
+		Rate:               cosmos.NewInt64Coin("uuram", 1),
 		Deposit:            cosmos.NewInt(100),
 		Nonce:              0,
 		Id:                 151,

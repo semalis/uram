@@ -28,7 +28,7 @@ func TestFindContract(t *testing.T) {
 				"rate_amount", "open_cost", "deposit", "auth", "queries_per_minute", "settlement_duration", "paid", "reserve_contrib_asset",
 				"reserve_contrib_usd", "closed_height", "provider_id",
 			}).AddRow(int64(1), testTime, testTime, testPubKey.String(), "mock", testPubKey.String(), testPubKey.String(), int64(1024), "PayAsYouGo",
-				int64(10), "uarkeo", int64(10), int64(10), int64(100000), "STRICT", int64(10), int64(10), int64(1000), int64(100), int64(100), int64(2048), int64(1)),
+				int64(10), "uuram", int64(10), int64(10), int64(100000), "STRICT", int64(10), int64(10), int64(1000), int64(100), int64(100), int64(2048), int64(1)),
 		)
 	ctx := context.Background()
 	contract, err := db.GetContract(ctx, 1)
@@ -42,7 +42,7 @@ func TestFindContract(t *testing.T) {
 	assert.Equal(t, int64(1024), contract.Height)
 	assert.Equal(t, "PayAsYouGo", contract.ContractType)
 	assert.Equal(t, int64(10), contract.Duration)
-	assert.Equal(t, "uarkeo", contract.RateAsset)
+	assert.Equal(t, "uuram", contract.RateAsset)
 	assert.Equal(t, int64(10), contract.RateAmount)
 	assert.Equal(t, int64(10), contract.OpenCost)
 	assert.Equal(t, int64(100000), contract.Deposit)
@@ -71,7 +71,7 @@ func TestUpdateContract(t *testing.T) {
 		Type:               arkeotypes.ContractType_PAY_AS_YOU_GO,
 		Height:             1024,
 		Duration:           10,
-		Rate:               cosmostypes.NewCoin("uarkeo", cosmos.NewInt(10)),
+		Rate:               cosmostypes.NewCoin("uuram", cosmos.NewInt(10)),
 		OpenCost:           1000,
 		Deposit:            math.NewInt(10000),
 		SettlementDuration: 10,

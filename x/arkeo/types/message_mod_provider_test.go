@@ -15,7 +15,7 @@ func TestModProviderValidateBasic(t *testing.T) {
 	acct, err := pubkey.GetMyAddress()
 	require.NoError(t, err)
 
-	rates, err := cosmos.ParseCoins("15uarkeo")
+	rates, err := cosmos.ParseCoins("15uuram")
 	require.NoError(t, err)
 
 	// happy path

@@ -9,11 +9,11 @@ import (
 )
 
 func TestParseBondAmount(t *testing.T) {
-	amount, err := parseBondAmount("100uarkeo")
+	amount, err := parseBondAmount("100uuram")
 	require.NoError(t, err)
 	require.Equal(t, cosmos.NewInt(100), amount)
 
-	amount, err = parseBondAmount("-100uarkeo")
+	amount, err = parseBondAmount("-100uuram")
 	require.NoError(t, err)
 	require.Equal(t, cosmos.NewInt(-100), amount)
 
@@ -33,15 +33,15 @@ func TestParseBondAmount(t *testing.T) {
 	_, err = parseBondAmount("")
 	require.ErrorContains(t, err, "bad bond denom")
 
-	_, err = parseBondAmount("uarkeo")
+	_, err = parseBondAmount("uuram")
 	require.ErrorContains(t, err, "bad bond amount")
 
-	_, err = parseBondAmount("uarkeo")
+	_, err = parseBondAmount("uuram")
 	require.ErrorContains(t, err, "bad bond amount")
 
 	_, err = parseBondAmount("Paul Revere")
 	require.ErrorContains(t, err, "bad bond denom")
 
-	_, err = parseBondAmount("100uarkeo 100uarkeo")
+	_, err = parseBondAmount("100uuram 100uuram")
 	require.ErrorContains(t, err, "bad bond denom")
 }

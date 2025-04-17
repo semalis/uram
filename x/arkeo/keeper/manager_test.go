@@ -32,7 +32,7 @@ func TestContractEndBlock(t *testing.T) {
 	provider.Service = common.ETHService
 	require.NoError(t, k.SetProvider(ctx, provider))
 
-	rates, err := cosmos.ParseCoins("15uarkeo")
+	rates, err := cosmos.ParseCoins("15uuram")
 	require.NoError(t, err)
 
 	modProviderMsg := types.MsgModProvider{
@@ -154,7 +154,7 @@ func TestContractEndBlockWithSettlementDuration(t *testing.T) {
 	provider.Service = common.ETHService
 	require.NoError(t, k.SetProvider(ctx, provider))
 
-	rates, err := cosmos.ParseCoins("15uarkeo")
+	rates, err := cosmos.ParseCoins("15uuram")
 	require.NoError(t, err)
 
 	modProviderMsg := types.MsgModProvider{

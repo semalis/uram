@@ -28,7 +28,7 @@ add_claim_records() {
 
         # Append the new record to the JSON array
         records+=$(jq -n --arg chain "$chain_name" --arg address "$address" --arg amount_claim "$amount_claim" --arg amount_vote "$amount_vote" --arg amount_delegate "$amount_delegate" \
-            '{chain: $chain, address: $address, amount_claim: {denom: "uarkeo", amount: $amount_claim}, amount_vote: {denom: "uarkeo", amount: $amount_vote}, amount_delegate: {denom: "uarkeo", amount: $amount_delegate}, is_transferable: true}')
+            '{chain: $chain, address: $address, amount_claim: {denom: "uuram", amount: $amount_claim}, amount_vote: {denom: "uuram", amount: $amount_vote}, amount_delegate: {denom: "uuram", amount: $amount_delegate}, is_transferable: true}')
         records+=","
     done < <(tail -n +2 "$csv_file")
 

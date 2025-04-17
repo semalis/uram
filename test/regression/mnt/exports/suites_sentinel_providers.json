@@ -19,7 +19,7 @@
           "queries_per_minute": "100",
           "rate": {
             "amount": "1",
-            "denom": "uarkeo"
+            "denom": "uuram"
           },
           "service": 1,
           "settlement_duration": "0",
@@ -40,7 +40,7 @@
           "queries_per_minute": "100",
           "rate": {
             "amount": "1",
-            "denom": "uarkeo"
+            "denom": "uuram"
           },
           "service": 1,
           "settlement_duration": "0",
@@ -61,7 +61,7 @@
           "queries_per_minute": "100",
           "rate": {
             "amount": "1",
-            "denom": "uarkeo"
+            "denom": "uuram"
           },
           "service": 1,
           "settlement_duration": "0",
@@ -99,7 +99,7 @@
           "pay_as_you_go_rate": [
             {
               "amount": "3",
-              "denom": "uarkeo"
+              "denom": "uuram"
             }
           ],
           "pub_key": "tarkeopub1addwnpepqtsg8syrpcn60t2nnvnhtk6psr8qxlrtwjk8rmpkhxk9vy9wkd8ewmqv7rh",
@@ -109,7 +109,7 @@
           "subscription_rate": [
             {
               "amount": "10",
-              "denom": "uarkeo"
+              "denom": "uuram"
             }
           ]
         }
@@ -267,7 +267,7 @@
           "coins": [
             {
               "amount": "1000000200000",
-              "denom": "uarkeo"
+              "denom": "uuram"
             }
           ]
         },
@@ -276,7 +276,7 @@
           "coins": [
             {
               "amount": "50000000000000000",
-              "denom": "uarkeo"
+              "denom": "uuram"
             }
           ]
         },
@@ -285,7 +285,7 @@
           "coins": [
             {
               "amount": "999999999800000",
-              "denom": "uarkeo"
+              "denom": "uuram"
             }
           ]
         },
@@ -294,7 +294,7 @@
           "coins": [
             {
               "amount": "100",
-              "denom": "uarkeo"
+              "denom": "uuram"
             }
           ]
         },
@@ -303,7 +303,7 @@
           "coins": [
             {
               "amount": "5355388937",
-              "denom": "uarkeo"
+              "denom": "uuram"
             }
           ]
         },
@@ -312,7 +312,7 @@
           "coins": [
             {
               "amount": "300",
-              "denom": "uarkeo"
+              "denom": "uuram"
             }
           ]
         },
@@ -321,7 +321,7 @@
           "coins": [
             {
               "amount": "1000000000000000",
-              "denom": "uarkeo"
+              "denom": "uuram"
             }
           ]
         }
@@ -335,7 +335,7 @@
       "supply": [
         {
           "amount": "52001005355389337",
-          "denom": "uarkeo"
+          "denom": "uuram"
         }
       ]
     },
@@ -378,10 +378,10 @@
       "claim_records": [],
       "module_account_balance": {
         "amount": "0",
-        "denom": "uarkeo"
+        "denom": "uuram"
       },
       "params": {
-        "claim_denom": "uarkeo",
+        "claim_denom": "uuram",
         "duration_of_decay": "3600s",
         "duration_until_decay": "3600s",
         "initial_gas_amount": null
@@ -390,7 +390,7 @@
     "crisis": {
       "constant_fee": {
         "amount": "1000",
-        "denom": "uarkeo"
+        "denom": "uuram"
       }
     },
     "distribution": {
@@ -410,7 +410,7 @@
         "community_pool": [
           {
             "amount": "107107778.740000000000000000",
-            "denom": "uarkeo"
+            "denom": "uuram"
           }
         ]
       },
@@ -419,7 +419,7 @@
           "outstanding_rewards": [
             {
               "amount": "5248281158.260000000000000000",
-              "denom": "uarkeo"
+              "denom": "uuram"
             }
           ],
           "validator_address": "tarkeovaloper1hnyy4gp5tgarpg3xu6w5cw4zsyphx2lyfn54sh"
@@ -438,7 +438,7 @@
             "commission": [
               {
                 "amount": "524828115.826000000000000000",
-                "denom": "uarkeo"
+                "denom": "uuram"
               }
             ]
           },
@@ -452,7 +452,7 @@
             "rewards": [
               {
                 "amount": "4723453042.434000000000000000",
-                "denom": "uarkeo"
+                "denom": "uuram"
               }
             ]
           },
@@ -491,7 +491,7 @@
         "expedited_min_deposit": [
           {
             "amount": "50000000",
-            "denom": "uarkeo"
+            "denom": "uuram"
           }
         ],
         "expedited_threshold": "0.667000000000000000",
@@ -500,7 +500,7 @@
         "min_deposit": [
           {
             "amount": "10000000",
-            "denom": "uarkeo"
+            "denom": "uuram"
           }
         ],
         "min_deposit_ratio": "0.010000000000000000",
@@ -635,7 +635,7 @@
         "inflation_max": "0.200000000000000000",
         "inflation_min": "0.070000000000000000",
         "inflation_rate_change": "0.130000000000000000",
-        "mint_denom": "uarkeo"
+        "mint_denom": "uuram"
       }
     },
     "slashing": {
@@ -683,7 +683,7 @@
         }
       ],
       "params": {
-        "bond_denom": "uarkeo",
+        "bond_denom": "uuram",
         "historical_entries": 10000,
         "max_entries": 7,
         "max_validators": 100,

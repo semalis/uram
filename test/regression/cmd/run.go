@@ -73,7 +73,7 @@ func run(path string) error {
 
 	// init chain without recovery
 	log.Debug().Msg("Initializing chain")
-	cmd = exec.Command("uramd", "init", "local", "--chain-id", "arkeo", "--default-denom", "uarkeo", "-o")
+	cmd = exec.Command("uramd", "init", "local", "--chain-id", "arkeo", "--default-denom", "uuram", "-o")
 	out, err = cmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(string(out))

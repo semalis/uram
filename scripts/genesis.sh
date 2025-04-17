@@ -4,8 +4,8 @@ set -o pipefail
 set -ex
 
 CHAIN_ID="arkeo-testnet-v2"
-STAKE="1000000000uarkeo"
-TOKEN="uarkeo"
+STAKE="1000000000uuram"
+TOKEN="uuram"
 USER="ark"
 TOTAL_SUPPLY=1000000000 # Initial supply corresponding to the stake
 
@@ -56,9 +56,9 @@ add_claim_records() {
 	jq --arg CHAIN "$1" --arg ADDRESS "$2" --arg AMOUNTCLAIM "$3" --arg AMOUNTVOTE "$4" --arg AMOUNTDELEGATE "$5" --arg ISTRANSFERABLE "$6" '.app_state.claimarkeo.claim_records += [{
         "chain": $CHAIN,
 		"address": $ADDRESS,
-        "amount_claim": { "denom": "uarkeo", "amount": $AMOUNTCLAIM },
-        "amount_vote": { "denom": "uarkeo", "amount": $AMOUNTVOTE },
-        "amount_delegate": { "denom": "uarkeo", "amount": $AMOUNTDELEGATE },
+        "amount_claim": { "denom": "uuram", "amount": $AMOUNTCLAIM },
+        "amount_vote": { "denom": "uuram", "amount": $AMOUNTVOTE },
+        "amount_delegate": { "denom": "uuram", "amount": $AMOUNTDELEGATE },
         "is_transferable": true,
     }]' <~/.arkeo/config/genesis.json >/tmp/genesis.json
 	mv /tmp/genesis.json ~/.arkeo/config/genesis.json
@@ -135,7 +135,7 @@ if [ ! -f ~/.arkeo/config/genesis.json ]; then
 		source ./add-claim-records.sh
 	fi
 
-	sed -i 's/"stake"/"uarkeo"/g' ~/.arkeo/config/genesis.json
+	sed -i 's/"stake"/"uuram"/g' ~/.arkeo/config/genesis.json
 	sed -i '/"duration_until_decay"\|"duration_of_decay"/s/"3600s"/"7884000s"/' ~/.arkeo/config/genesis.json
 	sed -i 's/enable = false/enable = true/g' ~/.arkeo/config/app.toml
 	sed -i 's/127.0.0.1:26657/0.0.0.0:26657/g' ~/.arkeo/config/config.toml
@@ -149,4 +149,4 @@ if [ ! -f ~/.arkeo/config/genesis.json ]; then
 	uramd validate-genesis --trace
 fi
 
-uramd start --pruning nothing --minimum-gas-prices 0uarkeo
+uramd start --pruning nothing --minimum-gas-prices 0uuram

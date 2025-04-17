@@ -858,7 +858,7 @@ func (app *ArkeoApp) InitChainer(ctx sdk.Context, req *abci.RequestInitChain) (*
 			AnnualProvisions: math.LegacyMustNewDecFromStr("0.000000000000000000"),
 		},
 		Params: minttypes.Params{
-			MintDenom:           "uarkeo",
+			MintDenom:           "uuram",
 			InflationRateChange: math.LegacyMustNewDecFromStr("0.000000000000000000"),
 			InflationMax:        math.LegacyMustNewDecFromStr("0.000000000000000000"),
 			InflationMin:        math.LegacyMustNewDecFromStr("0.000000000000000000"),

@@ -57,9 +57,9 @@ func TestModProviderHandle(t *testing.T) {
 	provider.Bond = cosmos.NewInt(500)
 	require.NoError(t, k.SetProvider(ctx, provider))
 
-	sRates, err := cosmos.ParseCoins("11uarkeo")
+	sRates, err := cosmos.ParseCoins("11uuram")
 	require.NoError(t, err)
-	pRates, err := cosmos.ParseCoins("12uarkeo")
+	pRates, err := cosmos.ParseCoins("12uuram")
 	require.NoError(t, err)
 
 	// happy path

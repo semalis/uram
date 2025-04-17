@@ -42,7 +42,7 @@ func TestValidate(t *testing.T) {
 	require.NoError(t, err)
 	client, err := common.NewPubKeyFromCrypto(pk)
 	require.NoError(t, err)
-	rate, err := cosmos.ParseCoin("10uarkeo")
+	rate, err := cosmos.ParseCoin("10uuram")
 	require.NoError(t, err)
 
 	contract := types.NewContract(pubkey, service, client)
@@ -109,7 +109,7 @@ func TestHandlePayAsYouGo(t *testing.T) {
 	require.NoError(t, k.MintToModule(ctx, types.ReserveName, getCoin(common.Tokens(10000))))
 	require.NoError(t, k.SendFromModuleToModule(ctx, types.ReserveName, types.ContractName, getCoins(1000)))
 	initalModuleBalance := k.GetBalanceOfModule(ctx, types.ReserveName, configs.Denom).Int64()
-	rate, err := cosmos.ParseCoin("10uarkeo")
+	rate, err := cosmos.ParseCoin("10uuram")
 	require.NoError(t, err)
 
 	contract := types.NewContract(pubkey, service, client)
@@ -203,7 +203,7 @@ func TestHandleSubscription(t *testing.T) {
 	require.NoError(t, k.MintToModule(ctx, types.ReserveName, getCoin(common.Tokens(10000))))
 	require.NoError(t, k.SendFromModuleToModule(ctx, types.ReserveName, types.ContractName, getCoins(1000)))
 	initalModuleBalance := k.GetBalanceOfModule(ctx, types.ReserveName, configs.Denom).Int64()
-	rate, err := cosmos.ParseCoin("10uarkeo")
+	rate, err := cosmos.ParseCoin("10uuram")
 	require.NoError(t, err)
 
 	contract := types.NewContract(pubkey, service, client)
@@ -293,7 +293,7 @@ func TestClaimContractIncomeHandler(t *testing.T) {
 	require.NoError(t, k.MintToModule(ctx, types.ReserveName, getCoin(common.Tokens(10000))))
 	require.NoError(t, k.SendFromModuleToModule(ctx, types.ReserveName, types.ContractName, getCoins(1000)))
 
-	rate, err := cosmos.ParseCoin("10uarkeo")
+	rate, err := cosmos.ParseCoin("10uuram")
 	require.NoError(t, err)
 
 	contract := types.NewContract(pubkey, service, client)
@@ -360,7 +360,7 @@ func TestClaimContractIncomeHandlerSignatureVerification(t *testing.T) {
 	require.NoError(t, err)
 	require.NoError(t, k.MintToModule(ctx, types.ModuleName, getCoin(common.Tokens(10000))))
 	require.NoError(t, k.SendFromModuleToModule(ctx, types.ModuleName, types.ContractName, getCoins(1000)))
-	rate, err := cosmos.ParseCoin("10uarkeo")
+	rate, err := cosmos.ParseCoin("10uuram")
 	require.NoError(t, err)
 
 	contract := types.NewContract(pubkey, service, client)
@@ -407,7 +407,7 @@ func TestSignatureReplay(t *testing.T) {
 	require.NoError(t, err)
 	client, err := common.NewPubKeyFromCrypto(pk)
 	require.NoError(t, err)
-	rate, err := cosmos.ParseCoin("10uarkeo")
+	rate, err := cosmos.ParseCoin("10uuram")
 	require.NoError(t, err)
 
 	contract := types.NewContract(pubkey, service, client)

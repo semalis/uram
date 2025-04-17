@@ -114,7 +114,7 @@
           "address": "tarkeo1d0m97ywk2y4vq58ud6q5e0r3q9khj9e3unfe4t",
           "coins": [
             {
-              "denom": "uarkeo",
+              "denom": "uuram",
               "amount": "2369600000000000"
             }
           ]
@@ -123,7 +123,7 @@
           "address": "tarkeo14tmx70mvve3u7hfmd45vle49kvylk6s2wllxny",
           "coins": [
             {
-              "denom": "uarkeo",
+              "denom": "uuram",
               "amount": "3025000000000000"
             }
           ]
@@ -132,7 +132,7 @@
           "address": "tarkeo1jv65s3grqf6v6jl3dp4t6c9t9rk99cd8t6gr9e",
           "coins": [
             {
-              "denom": "uarkeo",
+              "denom": "uuram",
               "amount": "5445000000000000"
             }
           ]
@@ -141,7 +141,7 @@
           "address": "tarkeo1eqrt7a7v546cge5xf8xfy4e0a62elgcw24lr8w",
           "coins": [
             {
-              "denom": "uarkeo",
+              "denom": "uuram",
               "amount": "1210000000000000"
             }
           ]
@@ -150,7 +150,7 @@
           "address": "tarkeo1jlle99xs225382qhcz590rleflxcsfddtj8wqe",
           "coins": [
             {
-              "denom": "uarkeo",
+              "denom": "uuram",
               "amount": "100000000000"
             }
           ]
@@ -159,7 +159,7 @@
           "address": "tarkeo1d2qfzq4x7wtfmaq5kys4r3yrehyjaanm3r43tj",
           "coins": [
             {
-              "denom": "uarkeo",
+              "denom": "uuram",
               "amount": "100000000000"
             }
           ]
@@ -168,7 +168,7 @@
           "address": "tarkeo1zt253rzccw7ru33eagwymfwslvwjsql0jhw297",
           "coins": [
             {
-              "denom": "uarkeo",
+              "denom": "uuram",
               "amount": "100000000000"
             }
           ]
@@ -177,7 +177,7 @@
           "address": "tarkeo1u9qgazatezaswv7uh0mq4x8p42gcd8fnpd9ymw",
           "coins": [
             {
-              "denom": "uarkeo",
+              "denom": "uuram",
               "amount": "100000000000"
             }
           ]
@@ -186,7 +186,7 @@
           "address": "tarkeo1579hvjcpfr88jm5sx3q2mp4rd4l4yj90qdt72l",
           "coins": [
             {
-              "denom": "uarkeo",
+              "denom": "uuram",
               "amount": "50000000000000"
             }
           ]
@@ -194,7 +194,7 @@
       ],
       "supply": [
         {
-          "denom": "uarkeo",
+          "denom": "uuram",
           "amount": "12100000000000000"
         }
       ],
@@ -203,7 +203,7 @@
           "description": "The native staking token of the Arkeo blockchain",
           "denom_units": [
             {
-              "denom": "uarkeo",
+              "denom": "uuram",
               "exponent": 0
             },
             {
@@ -211,7 +211,7 @@
               "exponent": 8
             }
           ],
-          "base": "uarkeo",
+          "base": "uuram",
           "display": "arkeo",
           "name": "Arkeo Token",
           "symbol": "ARKEO"
@@ -225,21 +225,21 @@
     },
     "claimarkeo": {
       "module_account_balance": {
-        "denom": "uarkeo",
+        "denom": "uuram",
         "amount": "0"
       },
       "params": {
         "airdrop_start_time": "2025-04-01T18:30:00Z",
         "duration_until_decay": "604800s",
         "duration_of_decay": "604800s",
-        "claim_denom": "uarkeo",
+        "claim_denom": "uuram",
         "initial_gas_amount": null
       },
       "claim_records": []
     },
     "crisis": {
       "constant_fee": {
-        "denom": "uarkeo",
+        "denom": "uuram",
         "amount": "100000000"
       }
     },
@@ -253,7 +253,7 @@
       "fee_pool": {
         "community_pool": [
           {
-            "denom": "uarkeo",
+            "denom": "uuram",
             "amount": "5445000000000000"
           }
         ]
@@ -300,7 +300,7 @@
                   "key": "2zQ0WSHu3ZZM8UNvTe5nSiKbGe3qZqcHH+qy0GnenG8="
                 },
                 "value": {
-                  "denom": "uarkeo",
+                  "denom": "uuram",
                   "amount": "99999990000"
                 }
               }
@@ -362,7 +362,7 @@
                   "key": "h+YsGsQFC0uTfH0gVDfDHd1Cu0RXYdFe/jWe/peNYcU="
                 },
                 "value": {
-                  "denom": "uarkeo",
+                  "denom": "uuram",
                   "amount": "99999990000"
                 }
               }
@@ -424,7 +424,7 @@
                   "key": "se7BTXKNYlziaFVRKlZV8AYDRpd0GgO9nLBDa5QNQoo="
                 },
                 "value": {
-                  "denom": "uarkeo",
+                  "denom": "uuram",
                   "amount": "99999990000"
                 }
               }
@@ -486,7 +486,7 @@
                   "key": "LnTmTGhgoRGYx3iKCc0oDOpA9ZEfTMKayr4KrtJqTOE="
                 },
                 "value": {
-                  "denom": "uarkeo",
+                  "denom": "uuram",
                   "amount": "99999990000"
                 }
               }
@@ -536,7 +536,7 @@
       "params": {
         "min_deposit": [
           {
-            "denom": "uarkeo",
+            "denom": "uuram",
             "amount": "50000000000"
           }
         ],
@@ -552,7 +552,7 @@
         "expedited_threshold": "0.667000000000000000",
         "expedited_min_deposit": [
           {
-            "denom": "uarkeo",
+            "denom": "uuram",
             "amount": "100000000000"
           }
         ],
@@ -641,7 +641,7 @@
         "annual_provisions": "0.000000000000000000"
       },
       "params": {
-        "mint_denom": "uarkeo",
+        "mint_denom": "uuram",
         "inflation_rate_change": "0.000000000000000000",
         "inflation_max": "0.000000000000000000",
         "inflation_min": "0.000000000000000000",
@@ -662,7 +662,7 @@
     },
     "staking": {
       "params": {
-        "bond_denom": "uarkeo",
+        "bond_denom": "uuram",
         "unbonding_time": "1814400s",
         "max_validators": 100,
         "max_entries": 7,

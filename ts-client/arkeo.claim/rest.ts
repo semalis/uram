@@ -69,7 +69,7 @@ export interface ClaimParams {
   claim_denom?: string;
 
   /**
-   * uarkeo to distribute to arkeo account for gas to make claiming easier
+   * uuram to distribute to arkeo account for gas to make claiming easier
    * Coin defines a token with a denomination and an amount.
    *
    * NOTE: The amount field is an Int which implements the custom method

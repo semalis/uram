@@ -6,7 +6,7 @@ genesis:
         - address: {{ addr_module_contract }}
           coins:
             - amount: "300"
-              denom: uarkeo
+              denom: uuram
     arkeo:
       contracts:
         - provider: {{ pubkey_fox }}
@@ -16,7 +16,7 @@ genesis:
           height: 1
           duration: 1000000000000
           rate: 
-            denom: "uarkeo"
+            denom: "uuram"
             amount: "1"
           deposit: "100"
           paid: "0"
@@ -30,7 +30,7 @@ genesis:
           height: 1
           duration: 1000000000000
           rate: 
-            denom: "uarkeo"
+            denom: "uuram"
             amount: "1"
           deposit: "100"
           paid: "0"
@@ -44,7 +44,7 @@ genesis:
           height: 1
           duration: 10
           rate: 
-            denom: "uarkeo"
+            denom: "uuram"
             amount: "1"
           deposit: "100"
           paid: "0"

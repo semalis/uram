@@ -20,7 +20,7 @@ type: check
 description: check that bonding to a data provider works
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_fox }}
 asserts:
-  - .balances[]|select(.denom=="uarkeo")|.amount|tonumber == 1000000000000000
+  - .balances[]|select(.denom=="uuram")|.amount|tonumber == 1000000000000000
 ---
 ########################################################################################
 # bond up a provider
@@ -39,7 +39,7 @@ type: check
 description: check that bonding to a data provider works
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_fox }}
 asserts:
-  - .balances[]|select(.denom=="uarkeo")|.amount|tonumber == 999999999900000
+  - .balances[]|select(.denom=="uuram")|.amount|tonumber == 999999999900000
 ---
 type: check
 description: provider should exist
@@ -76,10 +76,10 @@ status: 1
 min_contract_duration: 2
 max_contract_duration: 3
 subscription_rate:
-  - denom: "uarkeo"
+  - denom: "uuram"
     amount: "4"
 pay_as_you_go_rate:
-  - denom: "uarkeo"
+  - denom: "uuram"
     amount: "5"
 settlement_duration: 6
 ---
@@ -90,7 +90,7 @@ type: check
 description: check that bonding to a data provider works
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_fox }}
 asserts:
-  - .balances[]|select(.denom=="uarkeo")|.amount|tonumber == 999999999900000
+  - .balances[]|select(.denom=="uuram")|.amount|tonumber == 999999999900000
 ---
 type: check
 description: provider should exist
@@ -122,10 +122,10 @@ asserts:
   - .max_contract_duration | tonumber == 3
   - .settlement_duration | tonumber == 6
   - .subscription_rates | length == 1
-  - .subscription_rates[0].denom == "uarkeo"
+  - .subscription_rates[0].denom == "uuram"
   - .subscription_rates[0].amount == "4"
   - .paygo_rates | length == 1
-  - .paygo_rates[0].denom == "uarkeo"
+  - .paygo_rates[0].denom == "uuram"
   - .paygo_rates[0].amount == "5"
 ---
 ########################################################################################
@@ -145,7 +145,7 @@ type: check
 description: check that bonding to a data provider works
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_fox }}
 asserts:
-  - .balances[]|select(.denom=="uarkeo")|.amount|tonumber == 999999999900000
+  - .balances[]|select(.denom=="uuram")|.amount|tonumber == 999999999900000
 ---
 type: check
 description: provider should exist
@@ -172,7 +172,7 @@ type: check
 description: check that bonding to a data provider works
 endpoint: http://localhost:1317/cosmos/bank/v1beta1/balances/{{ addr_fox }}
 asserts:
-  - .balances[]|select(.denom=="uarkeo")|.amount|tonumber == 1000000000000000
+  - .balances[]|select(.denom=="uuram")|.amount|tonumber == 1000000000000000
 ---
 type: check
 description: provider should exist

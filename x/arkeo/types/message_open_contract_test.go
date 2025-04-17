@@ -15,7 +15,7 @@ func TestBondProviderValidateBasic(t *testing.T) {
 	acct, err := pubkey.GetMyAddress()
 	require.NoError(t, err)
 
-	rate, err := cosmos.ParseCoin("0uarkeo")
+	rate, err := cosmos.ParseCoin("0uuram")
 	require.NoError(t, err)
 
 	msg := MsgOpenContract{
@@ -33,7 +33,7 @@ func TestBondProviderValidateBasic(t *testing.T) {
 	err = msg.ValidateBasic()
 	require.ErrorIs(t, err, ErrOpenContractRate)
 
-	msg.Rate, _ = cosmos.ParseCoin("100uarkeo")
+	msg.Rate, _ = cosmos.ParseCoin("100uuram")
 	err = msg.ValidateBasic()
 	require.NoError(t, err)
 

@@ -15,7 +15,7 @@ export interface Params {
     | undefined;
   /** denom of claimable asset */
   claimDenom: string;
-  /** uarkeo to distribute to arkeo account for gas to make claiming easier */
+  /** uuram to distribute to arkeo account for gas to make claiming easier */
   initialGasAmount: Coin | undefined;
 }
 

@@ -31,7 +31,7 @@ uramd debug pubkey-raw <result-from-above-command> | grep "Bech32 Acc" | awk '{ 
 Bond your provider by executing the following command:
 
 ```shell
-uramd tx arkeo bond-provider <provider-pubkey> <service-providing> <bond-amount> --from <provider-wallet> --keyring-backend 🧪 --fees 20uarkeo
+uramd tx arkeo bond-provider <provider-pubkey> <service-providing> <bond-amount> --from <provider-wallet> --keyring-backend 🧪 --fees 20uuram
 ```
 
 ## 🚀 Starting the Sentinel Service
@@ -99,7 +99,7 @@ I[2024-10-28|11:58:20.057] service start                                msg="Sta
 Once the Sentinel service is running, update the provider metadata by running:
 
 ```shell
-uramd tx arkeo mod-provider <provider-pubkey> <service> "http://<sentineladdress>/metadata.json" <nonce> <status> <min-contract-duration> <max-contract-duration> <subscription-rates> <pay-as-you-go-rates> <settlement-duration> --from <provider-wallet> --keyring-backend  --fees 20uarkeo
+uramd tx arkeo mod-provider <provider-pubkey> <service> "http://<sentineladdress>/metadata.json" <nonce> <status> <min-contract-duration> <max-contract-duration> <subscription-rates> <pay-as-you-go-rates> <settlement-duration> --from <provider-wallet> --keyring-backend  --fees 20uuram
 ```
 
 ## Sequence Diagram

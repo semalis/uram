@@ -45,12 +45,12 @@ func TestGenesisWithContracts(t *testing.T) {
 	provider.Status = types.ProviderStatus_ONLINE
 	provider.LastUpdate = 100
 	provider.Bond = cosmos.NewInt(100)
-	provider.SubscriptionRate, _ = cosmos.ParseCoins("100uarkeo")
-	provider.PayAsYouGoRate, _ = cosmos.ParseCoins("100uarkeo")
+	provider.SubscriptionRate, _ = cosmos.ParseCoins("100uuram")
+	provider.PayAsYouGoRate, _ = cosmos.ParseCoins("100uuram")
 	err := k.SetProvider(ctx, provider)
 	require.NoError(t, err)
 
-	rate, _ := cosmos.ParseCoin("100uarkeo")
+	rate, _ := cosmos.ParseCoin("100uuram")
 
 	// create contracts
 	contracts := []types.Contract{

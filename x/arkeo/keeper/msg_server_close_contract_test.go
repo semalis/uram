@@ -60,7 +60,7 @@ func TestCloseContractHandle(t *testing.T) {
 
 	service := common.BTCService
 	require.True(t, k.GetBalance(ctx, provider).IsZero())
-	rate, err := cosmos.ParseCoin("5uarkeo")
+	rate, err := cosmos.ParseCoin("5uuram")
 	require.NoError(t, err)
 
 	openContractMessage := types.MsgOpenContract{
@@ -124,7 +124,7 @@ func TestCloseSubscriptionContract(t *testing.T) {
 	provider.Bond = cosmos.NewInt(10000000000)
 	require.NoError(t, k.SetProvider(ctx, provider))
 
-	rates, err := cosmos.ParseCoins("15uarkeo")
+	rates, err := cosmos.ParseCoins("15uuram")
 	require.NoError(t, err)
 
 	modProviderMsg := types.MsgModProvider{
@@ -230,7 +230,7 @@ func TestClosePayAsYouGoContract(t *testing.T) {
 	provider.Bond = cosmos.NewInt(10000000000)
 	require.NoError(t, k.SetProvider(ctx, provider))
 
-	rates, err := cosmos.ParseCoins("15uarkeo")
+	rates, err := cosmos.ParseCoins("15uuram")
 	require.NoError(t, err)
 
 	creatorAddress := types.GetRandomBech32Addr()

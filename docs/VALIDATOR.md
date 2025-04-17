@@ -49,7 +49,7 @@ Create a file called "validator.json". Use the template below replacing the vali
 ```json
 {
 	"pubkey": {"@type":"/cosmos.crypto.ed25519.PubKey","key":"EwLZ+A9ycVsWxHNyuGLHr5Na2fV7mkSG0AYO7/vQHS4="},
-	"amount": "1000000uarkeo",
+	"amount": "1000000uuram",
 	"moniker": "myvalidator",
 	"identity": "optional identity signature (ex. UPort or Keybase)",
 	"website": "validator's (optional) website",
@@ -64,7 +64,7 @@ Create a file called "validator.json". Use the template below replacing the vali
 
 Send your validator creation request to the blockchain
 ```shell
-uramd tx staking create-validator validator.json --from <your-wallet-name> --chain-id arkeo-testnet-3 --fees="500uarkeo"
+uramd tx staking create-validator validator.json --from <your-wallet-name> --chain-id arkeo-testnet-3 --fees="500uuram"
 ```
 
 ## Restart the Service
@@ -99,7 +99,7 @@ uramd keys show wallet --bech val -a
 Bond more tokens (if you want to increase your validator stake you should bond more to your valoper address):
 
 ```shell
-uramd tx staking delegate YOUR_VALOPER_ADDRESS <token amount to stake>uarkeo --from wallet --chain-id $CHAIN_ID --fees="500uarkeo"
+uramd tx staking delegate YOUR_VALOPER_ADDRESS <token amount to stake>uuram --from wallet --chain-id $CHAIN_ID --fees="500uuram"
 ```
 
 ## Check Validators Status

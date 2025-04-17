@@ -40,7 +40,7 @@ func TestHandleOpenContractEvent(t *testing.T) {
 		Type:               arkeotypes.ContractType_PAY_AS_YOU_GO,
 		Height:             1024,
 		Duration:           10,
-		Rate:               cosmostypes.NewCoin("uarkeo", math.NewInt(2)),
+		Rate:               cosmostypes.NewCoin("uuram", math.NewInt(2)),
 		OpenCost:           0,
 		Deposit:            math.NewInt(100000),
 		SettlementDuration: 10,

@@ -21,7 +21,7 @@ func TestEventParsing(t *testing.T) {
 	}{
 		{
 			Name:    "EventOpenContract",
-			Payload: `{ "type": "arkeo.arkeo.EventOpenContract", "attributes": [ { "key": "authorization", "value": "\"STRICT\"", "index": true }, { "key": "client", "value": "\"tarkeopub1addwnpepqgpjgp5v8tj6gdh6gczqwww5ksh4g8ync8xpjjssawsn7cxqwmhmjy4d8d8\"", "index": true }, { "key": "contract_id", "value": "\"2\"", "index": true }, { "key": "delegate", "value": "\"\"", "index": true }, { "key": "deposit", "value": "\"900\"", "index": true }, { "key": "duration", "value": "\"60\"", "index": true }, { "key": "height", "value": "\"1495\"", "index": true }, { "key": "open_cost", "value": "\"100000000\"", "index": true }, { "key": "provider", "value": "\"tarkeopub1addwnpepqf0vmghuakef4zxnh6hv2gewmqgm5tdg9f6w3qxjpw49xnsjf36f7f40eve\"", "index": true }, { "key": "queries_per_minute", "value": "\"10\"", "index": true }, { "key": "rate", "value": "{\"denom\":\"uarkeo\",\"amount\":\"15\"}", "index": true }, { "key": "service", "value": "\"mock\"", "index": true }, { "key": "settlement_duration", "value": "\"10\"", "index": true }, { "key": "type", "value": "\"PAY_AS_YOU_GO\"", "index": true } ] }`,
+			Payload: `{ "type": "arkeo.arkeo.EventOpenContract", "attributes": [ { "key": "authorization", "value": "\"STRICT\"", "index": true }, { "key": "client", "value": "\"tarkeopub1addwnpepqgpjgp5v8tj6gdh6gczqwww5ksh4g8ync8xpjjssawsn7cxqwmhmjy4d8d8\"", "index": true }, { "key": "contract_id", "value": "\"2\"", "index": true }, { "key": "delegate", "value": "\"\"", "index": true }, { "key": "deposit", "value": "\"900\"", "index": true }, { "key": "duration", "value": "\"60\"", "index": true }, { "key": "height", "value": "\"1495\"", "index": true }, { "key": "open_cost", "value": "\"100000000\"", "index": true }, { "key": "provider", "value": "\"tarkeopub1addwnpepqf0vmghuakef4zxnh6hv2gewmqgm5tdg9f6w3qxjpw49xnsjf36f7f40eve\"", "index": true }, { "key": "queries_per_minute", "value": "\"10\"", "index": true }, { "key": "rate", "value": "{\"denom\":\"uuram\",\"amount\":\"15\"}", "index": true }, { "key": "service", "value": "\"mock\"", "index": true }, { "key": "settlement_duration", "value": "\"10\"", "index": true }, { "key": "type", "value": "\"PAY_AS_YOU_GO\"", "index": true } ] }`,
 			Checker: func(t *testing.T, result any) {
 				assert.IsType(t, arkeotypes.EventOpenContract{}, result)
 				e, ok := result.(arkeotypes.EventOpenContract)
@@ -38,7 +38,7 @@ func TestEventParsing(t *testing.T) {
 				assert.Equal(t, arkeotypes.ContractAuthorization_STRICT, e.Authorization)
 				assert.Equal(t, arkeotypes.ContractType_PAY_AS_YOU_GO, e.Type)
 				assert.NotNil(t, e.Rate)
-				assert.Equal(t, "uarkeo", e.Rate.Denom)
+				assert.Equal(t, "uuram", e.Rate.Denom)
 				assert.Equal(t, int64(15), e.Rate.Amount.Int64())
 			},
 		},
@@ -63,7 +63,7 @@ func TestEventParsing(t *testing.T) {
 		},
 		{
 			Name:    "EventModProvider",
-			Payload: `{ "type": "arkeo.arkeo.EventModProvider", "attributes": [ { "key": "bond", "value": "\"20000000000\"", "index": true }, { "key": "creator", "value": "\"tarkeo19358z26jwh3e4rd6psxqf8q6f3pe6f8s7v0x2a\"", "index": true }, { "key": "max_contract_duration", "value": "\"100\"", "index": true }, { "key": "metadata_nonce", "value": "\"1\"", "index": true }, { "key": "metadata_uri", "value": "\"http://localhost:3636/metadata.json\"", "index": true }, { "key": "min_contract_duration", "value": "\"10\"", "index": true }, { "key": "pay_as_you_go_rate", "value": "[{\"denom\":\"uarkeo\",\"amount\":\"15\"}]", "index": true }, { "key": "provider", "value": "\"tarkeopub1addwnpepqf0vmghuakef4zxnh6hv2gewmqgm5tdg9f6w3qxjpw49xnsjf36f7f40eve\"", "index": true }, { "key": "service", "value": "\"mock\"", "index": true }, { "key": "settlement_duration", "value": "\"10\"", "index": true }, { "key": "status", "value": "\"ONLINE\"", "index": true }, { "key": "subscription_rate", "value": "[{\"denom\":\"uarkeo\",\"amount\":\"10\"}]", "index": true } ] }`,
+			Payload: `{ "type": "arkeo.arkeo.EventModProvider", "attributes": [ { "key": "bond", "value": "\"20000000000\"", "index": true }, { "key": "creator", "value": "\"tarkeo19358z26jwh3e4rd6psxqf8q6f3pe6f8s7v0x2a\"", "index": true }, { "key": "max_contract_duration", "value": "\"100\"", "index": true }, { "key": "metadata_nonce", "value": "\"1\"", "index": true }, { "key": "metadata_uri", "value": "\"http://localhost:3636/metadata.json\"", "index": true }, { "key": "min_contract_duration", "value": "\"10\"", "index": true }, { "key": "pay_as_you_go_rate", "value": "[{\"denom\":\"uuram\",\"amount\":\"15\"}]", "index": true }, { "key": "provider", "value": "\"tarkeopub1addwnpepqf0vmghuakef4zxnh6hv2gewmqgm5tdg9f6w3qxjpw49xnsjf36f7f40eve\"", "index": true }, { "key": "service", "value": "\"mock\"", "index": true }, { "key": "settlement_duration", "value": "\"10\"", "index": true }, { "key": "status", "value": "\"ONLINE\"", "index": true }, { "key": "subscription_rate", "value": "[{\"denom\":\"uuram\",\"amount\":\"10\"}]", "index": true } ] }`,
 			Checker: func(t *testing.T, result any) {
 				assert.IsType(t, arkeotypes.EventModProvider{}, result)
 				e, ok := result.(arkeotypes.EventModProvider)
@@ -76,10 +76,10 @@ func TestEventParsing(t *testing.T) {
 				assert.Equal(t, int64(10), e.MinContractDuration)
 				assert.Equal(t, int64(100), e.MaxContractDuration)
 				assert.Len(t, e.SubscriptionRate, 1)
-				assert.Equal(t, "uarkeo", e.SubscriptionRate[0].Denom)
+				assert.Equal(t, "uuram", e.SubscriptionRate[0].Denom)
 				assert.Equal(t, int64(10), e.SubscriptionRate[0].Amount.Int64())
 				assert.Len(t, e.PayAsYouGoRate, 1)
-				assert.Equal(t, "uarkeo", e.PayAsYouGoRate[0].Denom)
+				assert.Equal(t, "uuram", e.PayAsYouGoRate[0].Denom)
 				assert.Equal(t, int64(15), e.PayAsYouGoRate[0].Amount.Int64())
 				assert.Equal(t, int64(20000000000), e.Bond.Int64())
 				assert.Equal(t, int64(10), e.SettlementDuration)
@@ -180,7 +180,7 @@ func TestConvertEventToMapString(t *testing.T) {
     },
     {
       "key": "rate",
-      "value": "{\"denom\":\"uarkeo\",\"amount\":\"15\"}",
+      "value": "{\"denom\":\"uuram\",\"amount\":\"15\"}",
       "index": true
     },
     {
