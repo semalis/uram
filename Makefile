@@ -1,105 +1,146 @@
-BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
-COMMIT := $(shell git log -1 --format='%H')
-APPNAME := uram
+#!/usr/bin/make -f
 
-# do not override user values
+BUILDDIR ?= $(CURDIR)/build
+LEDGER_ENABLED ?= true
+
+VERSION := $(shell git describe --tags 2>/dev/null)
+COMMIT := $(shell git log -1 --format='%H')
+
 ifeq (,$(VERSION))
   VERSION := $(shell git describe --exact-match 2>/dev/null)
-  # if VERSION is empty, then populate it with branch name and raw commit hash
-  ifeq (,$(VERSION))
-    VERSION := $(BRANCH)-$(COMMIT)
+  # if VERSION is empty, then populate it with branch's name and raw commit hash
+  ifeq (main,$(VERSION))
+    VERSION := v0.1.0
   endif
 endif
 
-# Update the ldflags with the app, client & server names
-ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=$(APPNAME) \
-	-X github.com/cosmos/cosmos-sdk/version.AppName=$(APPNAME)d \
-	-X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
-	-X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT)
+# process build tags
+build_tags = netgo
+ifeq ($(LEDGER_ENABLED),true)
+	ifeq ($(OS),Windows_NT)
+	GCCEXE = $(shell where gcc.exe 2> NUL)
+	ifeq ($(GCCEXE),)
+		$(error gcc.exe not installed for ledger support, please install or set LEDGER_ENABLED=false)
+	else
+		build_tags += ledger
+	endif
+	else
+	UNAME_S = $(shell uname -s)
+	ifeq ($(UNAME_S),OpenBSD)
+		$(warning OpenBSD detected, disabling ledger support (https://github.com/cosmos/cosmos-sdk/issues/1988))
+	else
+		GCC = $(shell command -v gcc 2> /dev/null)
+		ifeq ($(GCC),)
+			$(error gcc not installed for ledger support, please install or set LEDGER_ENABLED=false)
+		else
+			build_tags += ledger
+		endif
+	endif
+	endif
+endif
 
-BUILD_FLAGS := -ldflags '$(ldflags)'
+whitespace :=
+whitespace += $(whitespace)
+comma := ,
+build_tags_comma_sep := $(subst $(whitespace),$(comma),$(build_tags))
 
-##############
-###  Test  ###
-##############
+ldflags = -X github.com/cosmos/cosmos-sdk/version.Name=uram \
+		  -X github.com/cosmos/cosmos-sdk/version.AppName=uramd \
+		  -X github.com/cosmos/cosmos-sdk/version.Version=$(VERSION) \
+		  -X github.com/cosmos/cosmos-sdk/version.Commit=$(COMMIT) \
+		  -X "github.com/cosmos/cosmos-sdk/version.BuildTags=$(build_tags_comma_sep)" \
+		  -X github.com/cometbft/cometbft/version.TMCoreSemVer=$(TM_VERSION)
 
-test-unit:
-	@echo Running unit tests...
-	@go test -mod=readonly -v -timeout 30m ./...
+# DB backend selection
+ifeq (cleveldb,$(findstring cleveldb,$(CORE_BUILD_OPTIONS)))
+  build_tags += gcc
+endif
+ifeq (badgerdb,$(findstring badgerdb,$(CORE_BUILD_OPTIONS)))
+  build_tags += badgerdb
+endif
+# handle rocksdb
+ifeq (rocksdb,$(findstring rocksdb,$(CORE_BUILD_OPTIONS)))
+  CGO_ENABLED=1
+  build_tags += rocksdb
+endif
+# handle boltdb
+ifeq (boltdb,$(findstring boltdb,$(CORE_BUILD_OPTIONS)))
+  build_tags += boltdb
+endif
 
-test-race:
-	@echo Running unit tests with race condition reporting...
-	@go test -mod=readonly -v -race -timeout 30m ./...
+build_tags += $(BUILD_TAGS)
+build_tags := $(strip $(build_tags))
 
-test-cover:
-	@echo Running unit tests and creating coverage report...
-	@go test -mod=readonly -v -timeout 30m -coverprofile=$(COVER_FILE) -covermode=atomic ./...
-	@go tool cover -html=$(COVER_FILE) -o $(COVER_HTML_FILE)
-	@rm $(COVER_FILE)
+BUILD_FLAGS := -tags "$(build_tags)" -ldflags '$(ldflags)'
+# check for nostrip option
+ifeq (,$(findstring nostrip,$(CORE_BUILD_OPTIONS)))
+  BUILD_FLAGS += -trimpath
+endif
 
-bench:
-	@echo Running unit tests with benchmarking...
-	@go test -mod=readonly -v -timeout 30m -bench=. ./...
+# Check for debug option
+ifeq (debug,$(findstring debug,$(CORE_BUILD_OPTIONS)))
+  BUILD_FLAGS += -gcflags "all=-N -l"
+endif
 
-test: govet govulncheck test-unit
+# Docker variables
+DOCKER := $(shell which docker)
 
-.PHONY: test test-unit test-race test-cover bench
+###############################################################################
+###                                  Build                                  ###
+###############################################################################
 
-#################
-###  Install  ###
-#################
+all: build lint
 
-all: install
+install: go.sum
+	go install -mod=readonly $(BUILD_FLAGS) ./cmd/uramd
 
-install:
-	@echo "--> ensure dependencies have not been modified"
-	@go mod verify
-	@echo "--> installing $(APPNAME)d"
-	@go install $(BUILD_FLAGS) -mod=readonly ./cmd/$(APPNAME)d
+build:
+	go build $(BUILD_FLAGS) -o $(BUILDDIR)/uramd ./cmd/uramd
 
-.PHONY: all install
+build-linux:
+	GOOS=linux GOARCH=amd64 go build -mod=readonly $(BUILD_FLAGS) -o $(BUILDDIR)/linux-amd64/uramd ./cmd/uramd
 
-##################
-###  Protobuf  ###
-##################
+build-mac:
+	GOOS=darwin GOARCH=amd64 go build -mod=readonly $(BUILD_FLAGS) -o $(BUILDDIR)/darwin-amd64/uramd ./cmd/uramd
 
-# Use this target if you do not want to use Ignite for generating proto files
+build-mac-arm64:
+	GOOS=darwin GOARCH=arm64 go build -mod=readonly $(BUILD_FLAGS) -o $(BUILDDIR)/darwin-arm64/uramd ./cmd/uramd
 
-proto-deps:
-	@echo "Installing proto deps"
-	@echo "Proto deps present, run 'go tool' to see them"
+release-all: build-linux build-mac build-mac-arm64
 
-proto-gen:
-	@echo "Generating protobuf files..."
-	@ignite generate proto-go --yes
+$(BUILDDIR)/:
+	mkdir -p $(BUILDDIR)/
 
-.PHONY: proto-gen
+vulncheck: $(BUILDDIR)/
+	GOBIN=$(BUILDDIR) go install golang.org/x/vuln/cmd/govulncheck@latest
+	$(BUILDDIR)/govulncheck ./...
 
-#################
-###  Linting  ###
-#################
+.PHONY: all install lint build vulncheck
+
+###############################################################################
+###                          Tools & Dependencies                           ###
+###############################################################################
+
+go.sum: go.mod
+	@echo "Ensure dependencies have not been modified ..." >&2
+	go mod verify
+	go mod tidy
+
+###############################################################################
+###                                Linting                                  ###
+###############################################################################
+
+golangci_lint_cmd=golangci-lint
+golangci_version=v1.53.3
 
 lint:
 	@echo "--> Running linter"
-	@go tool github.com/golangci/golangci-lint/cmd/golangci-lint run ./... --timeout 15m
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@$(golangci_version)
+	@$(golangci_lint_cmd) run --timeout=10m
 
 lint-fix:
-	@echo "--> Running linter and fixing issues"
-	@go tool github.com/golangci/golangci-lint/cmd/golangci-lint run ./... --fix --timeout 15m
+	@echo "--> Running linter"
+	@go install github.com/golangci/golangci-lint/cmd/golangci-lint@$(golangci_version)
+	@$(golangci_lint_cmd) run --fix --out-format=tab --issues-exit-code=0
 
 .PHONY: lint lint-fix
-
-###################
-### Development ###
-###################
-
-govet:
-	@echo Running go vet...
-	@go vet ./...
-
-govulncheck:
-	@echo Running govulncheck...
-	@go tool golang.org/x/vuln/cmd/govulncheck@latest
-	@govulncheck ./...
-
-.PHONY: govet govulncheck
