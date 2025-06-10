@@ -1,0 +1,17 @@
+syntax = "proto3";
+package uram.uram.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "uram/uram/v1/params.proto";
+
+option go_package = "github.com/semalis/uram/x/uram/types";
+
+// GenesisState defines the uram module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}

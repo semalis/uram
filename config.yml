@@ -1,0 +1,36 @@
+version: 1
+default_denom: uram
+accounts:
+  - name: alice
+    coins:
+    - 200uram
+    - 50000000uuram
+  - name: bob
+    coins:
+    - 100uram
+    - 20000000uuram
+validators:
+  - name: alice
+    bonded: 150uram
+client:
+  openapi:
+    path: docs/static/openapi.yml
+faucet:
+  name: bob
+  coins:
+    - 5uram
+    - 100000uuram
+genesis:
+   app_state:
+      staking:
+         params:
+            bond_denom: "uuram"
+            unbonding_time: "1814400s"
+            max_validators: 100
+      bank:
+         params:
+            send_enabled:
+               - denom: uram
+                 enabled: true
+               - denom: uuram
+                 enabled: true
