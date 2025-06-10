@@ -1,6 +1,8 @@
 package app
 
 import (
+	scooterkeeper "github.com/semalis/uram/x/scooter/keeper"
+	scootermodule "github.com/semalis/uram/x/scooter/module"
 	"io"
 
 	clienthelpers "cosmossdk.io/client/v2/helpers"
@@ -75,6 +77,7 @@ type App struct {
 	appCodec          codec.Codec
 	txConfig          client.TxConfig
 	interfaceRegistry codectypes.InterfaceRegistry
+	ScooterKeeper     scooterkeeper.Keeper
 
 	// keepers
 	// only keepers required by the app are exposed
@@ -124,7 +127,8 @@ func AppConfig() depinject.Config {
 		depinject.Supply(
 			// supply custom module basics
 			map[string]module.AppModuleBasic{
-				genutiltypes.ModuleName: genutil.NewAppModuleBasic(genutiltypes.DefaultMessageValidator),
+				genutiltypes.ModuleName:  genutil.NewAppModuleBasic(genutiltypes.DefaultMessageValidator),
+				scootermodule.ModuleName: scootermodule.AppModuleBasic{},
 			},
 		),
 	)
@@ -179,6 +183,7 @@ func New(
 		&app.CircuitBreakerKeeper,
 		&app.ParamsKeeper,
 		&app.UramKeeper,
+		&app.ScooterKeeper,
 	); err != nil {
 		panic(err)
 	}
