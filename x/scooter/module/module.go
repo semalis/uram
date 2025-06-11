@@ -1,68 +1,143 @@
-package module
+package scooter
 
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 
 	"cosmossdk.io/core/appmodule"
-	"cosmossdk.io/depinject"
+	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/codec"
+	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
+	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/cosmos/cosmos-sdk/types/module"
+	"github.com/grpc-ecosystem/grpc-gateway/runtime"
+	"google.golang.org/grpc"
 
 	"github.com/semalis/uram/x/scooter/keeper"
 	"github.com/semalis/uram/x/scooter/types"
 )
 
 var (
-	_ appmodule.AppModule = AppModule{}
+	_ module.AppModuleBasic = (*AppModule)(nil)
+	_ module.AppModule      = (*AppModule)(nil)
+	_ module.HasGenesis     = (*AppModule)(nil)
+
+	_ appmodule.AppModule       = (*AppModule)(nil)
+	_ appmodule.HasBeginBlocker = (*AppModule)(nil)
+	_ appmodule.HasEndBlocker   = (*AppModule)(nil)
 )
 
+// AppModule implements the AppModule interface that defines the inter-dependent methods that modules need to implement
 type AppModule struct {
-	cdc    codec.Codec
-	keeper keeper.Keeper
+	cdc        codec.Codec
+	keeper     keeper.Keeper
+	authKeeper types.AuthKeeper
+	bankKeeper types.BankKeeper
 }
 
-func (am AppModule) RegisterServices(cfg module.Configurator) {
-	types.RegisterMsgServer(cfg.MsgServer(), keeper.NewMsgServerImpl(am.keeper))
-	types.RegisterQueryServer(cfg.QueryServer(), am.keeper)
+func NewAppModule(
+	cdc codec.Codec,
+	keeper keeper.Keeper,
+	authKeeper types.AuthKeeper,
+	bankKeeper types.BankKeeper,
+) AppModule {
+	return AppModule{
+		cdc:        cdc,
+		keeper:     keeper,
+		authKeeper: authKeeper,
+		bankKeeper: bankKeeper,
+	}
 }
 
-func (am AppModule) InitGenesis(ctx context.Context, cdc codec.JSONCodec, data json.RawMessage) []module.ValidatorUpdate {
+// IsAppModule implements the appmodule.AppModule interface.
+func (AppModule) IsAppModule() {}
+
+// Name returns the name of the module as a string.
+func (AppModule) Name() string {
+	return types.ModuleName
+}
+
+// RegisterLegacyAminoCodec registers the amino codec
+func (AppModule) RegisterLegacyAminoCodec(*codec.LegacyAmino) {}
+
+// RegisterGRPCGatewayRoutes registers the gRPC Gateway routes for the module.
+func (AppModule) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *runtime.ServeMux) {
+	if err := types.RegisterQueryHandlerClient(clientCtx.CmdContext, mux, types.NewQueryClient(clientCtx)); err != nil {
+		panic(err)
+	}
+}
+
+// RegisterInterfaces registers a module's interface types and their concrete implementations as proto.Message.
+func (AppModule) RegisterInterfaces(registrar codectypes.InterfaceRegistry) {
+	types.RegisterInterfaces(registrar)
+}
+
+// RegisterServices registers a gRPC query service to respond to the module-specific gRPC queries
+func (am AppModule) RegisterServices(registrar grpc.ServiceRegistrar) error {
+	types.RegisterMsgServer(registrar, keeper.NewMsgServerImpl(am.keeper))
+	types.RegisterQueryServer(registrar, keeper.NewQueryServerImpl(am.keeper))
+
 	return nil
 }
 
-func (am AppModule) ExportGenesis(ctx context.Context, cdc codec.JSONCodec) json.RawMessage {
-	return cdc.MustMarshalJSON(types.DefaultGenesis())
+// DefaultGenesis returns a default GenesisState for the module, marshalled to json.RawMessage.
+// The default GenesisState need to be defined by the module developer and is primarily used for testing.
+func (am AppModule) DefaultGenesis(codec.JSONCodec) json.RawMessage {
+	return am.cdc.MustMarshalJSON(types.DefaultGenesis())
 }
 
-func (am AppModule) AppModuleBasic() module.AppModuleBasic {
-	return AppModuleBasic{}
+// ValidateGenesis used to validate the GenesisState, given in its json.RawMessage form.
+func (am AppModule) ValidateGenesis(_ codec.JSONCodec, _ client.TxEncodingConfig, bz json.RawMessage) error {
+	var genState types.GenesisState
+	if err := am.cdc.UnmarshalJSON(bz, &genState); err != nil {
+		return fmt.Errorf("failed to unmarshal %s genesis state: %w", types.ModuleName, err)
+	}
+
+	return genState.Validate()
 }
 
-func (AppModule) IsOnePerModuleType() {}
+// InitGenesis performs the module's genesis initialization. It returns no validator updates.
+func (am AppModule) InitGenesis(ctx sdk.Context, _ codec.JSONCodec, gs json.RawMessage) {
+	var genState types.GenesisState
+	// Initialize global index to index in genesis state
+	if err := am.cdc.UnmarshalJSON(gs, &genState); err != nil {
+		panic(fmt.Errorf("failed to unmarshal %s genesis state: %w", types.ModuleName, err))
+	}
 
-type AppModuleBasic struct{}
-
-func (AppModuleBasic) Name() string { return types.ModuleName }
-
-func (AppModuleBasic) RegisterInterfaces(reg cdctypes.InterfaceRegistry) {
-	types.RegisterInterfaces(reg)
+	if err := am.keeper.InitGenesis(ctx, genState); err != nil {
+		panic(fmt.Errorf("failed to initialize %s genesis state: %w", types.ModuleName, err))
+	}
 }
 
-func (AppModuleBasic) RegisterLegacyAminoCodec(cdc *codec.LegacyAmino) {
-	types.RegisterLegacyAminoCodec(cdc)
+// ExportGenesis returns the module's exported genesis state as raw JSON bytes.
+func (am AppModule) ExportGenesis(ctx sdk.Context, _ codec.JSONCodec) json.RawMessage {
+	genState, err := am.keeper.ExportGenesis(ctx)
+	if err != nil {
+		panic(fmt.Errorf("failed to export %s genesis state: %w", types.ModuleName, err))
+	}
+
+	bz, err := am.cdc.MarshalJSON(genState)
+	if err != nil {
+		panic(fmt.Errorf("failed to marshal %s genesis state: %w", types.ModuleName, err))
+	}
+
+	return bz
 }
 
-func (AppModuleBasic) DefaultGenesis(cdc codec.JSONCodec) json.RawMessage {
-	return cdc.MustMarshalJSON(types.DefaultGenesis())
+// ConsensusVersion is a sequence number for state-breaking change of the module.
+// It should be incremented on each consensus-breaking change introduced by the module.
+// To avoid wrong/empty versions, the initial version should be set to 1.
+func (AppModule) ConsensusVersion() uint64 { return 1 }
+
+// BeginBlock contains the logic that is automatically triggered at the beginning of each block.
+// The begin block implementation is optional.
+func (am AppModule) BeginBlock(_ context.Context) error {
+	return nil
 }
 
-func (AppModuleBasic) ValidateGenesis(cdc codec.JSONCodec, _ client.TxEncodingConfig, bz json.RawMessage) error {
-	var data types.GenesisState
-	return cdc.UnmarshalJSON(bz, &data)
-}
-
-// ProvideModule for depinject
-func ProvideModule(cdc codec.Codec, k keeper.Keeper) appmodule.AppModule {
-	return AppModule{cdc: cdc, keeper: k}
+// EndBlock contains the logic that is automatically triggered at the end of each block.
+// The end block implementation is optional.
+func (am AppModule) EndBlock(_ context.Context) error {
+	return nil
 }

@@ -1,7 +1,12 @@
 package types
 
-import sdkerrors "cosmossdk.io/errors"
+// DONTCOVER
 
+import (
+	"cosmossdk.io/errors"
+)
+
+// x/scooter module sentinel errors
 var (
-	ErrInvalidCreator = sdkerrors.Register(ModuleName, 1, "invalid creator address")
+	ErrInvalidSigner = errors.Register(ModuleName, 1100, "expected gov account as only signer for proposal message")
 )

@@ -1,8 +1,6 @@
 package app
 
 import (
-	scooterkeeper "github.com/semalis/uram/x/scooter/keeper"
-	scootermodule "github.com/semalis/uram/x/scooter/module"
 	"io"
 
 	clienthelpers "cosmossdk.io/client/v2/helpers"
@@ -48,6 +46,7 @@ import (
 	ibckeeper "github.com/cosmos/ibc-go/v10/modules/core/keeper"
 
 	"github.com/semalis/uram/docs"
+	scootermodulekeeper "github.com/semalis/uram/x/scooter/keeper"
 	urammodulekeeper "github.com/semalis/uram/x/uram/keeper"
 )
 
@@ -77,7 +76,6 @@ type App struct {
 	appCodec          codec.Codec
 	txConfig          client.TxConfig
 	interfaceRegistry codectypes.InterfaceRegistry
-	ScooterKeeper     scooterkeeper.Keeper
 
 	// keepers
 	// only keepers required by the app are exposed
@@ -101,7 +99,8 @@ type App struct {
 	ICAHostKeeper       icahostkeeper.Keeper
 	TransferKeeper      ibctransferkeeper.Keeper
 
-	UramKeeper urammodulekeeper.Keeper
+	UramKeeper    urammodulekeeper.Keeper
+	ScooterKeeper scootermodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// simulation manager
@@ -127,8 +126,7 @@ func AppConfig() depinject.Config {
 		depinject.Supply(
 			// supply custom module basics
 			map[string]module.AppModuleBasic{
-				genutiltypes.ModuleName:  genutil.NewAppModuleBasic(genutiltypes.DefaultMessageValidator),
-				scootermodule.ModuleName: scootermodule.AppModuleBasic{},
+				genutiltypes.ModuleName: genutil.NewAppModuleBasic(genutiltypes.DefaultMessageValidator),
 			},
 		),
 	)

@@ -1,19 +1,64 @@
 package keeper
 
 import (
-	"context"
-	sdk "github.com/cosmos/cosmos-sdk/types"
+	"fmt"
+
+	"cosmossdk.io/collections"
+	"cosmossdk.io/core/address"
+	corestore "cosmossdk.io/core/store"
+	"github.com/cosmos/cosmos-sdk/codec"
+
 	"github.com/semalis/uram/x/scooter/types"
 )
 
 type Keeper struct {
-	storeKey sdk.StoreKey
+	storeService corestore.KVStoreService
+	cdc          codec.Codec
+	addressCodec address.Codec
+	// Address capable of executing a MsgUpdateParams message.
+	// Typically, this should be the x/gov module account.
+	authority []byte
+
+	Schema collections.Schema
+	Params collections.Item[types.Params]
+
+	bankKeeper types.BankKeeper
 }
 
-func NewKeeper(storeKey sdk.StoreKey) Keeper {
-	return Keeper{storeKey: storeKey}
+func NewKeeper(
+	storeService corestore.KVStoreService,
+	cdc codec.Codec,
+	addressCodec address.Codec,
+	authority []byte,
+
+	bankKeeper types.BankKeeper,
+) Keeper {
+	if _, err := addressCodec.BytesToString(authority); err != nil {
+		panic(fmt.Sprintf("invalid authority address %s: %s", authority, err))
+	}
+
+	sb := collections.NewSchemaBuilder(storeService)
+
+	k := Keeper{
+		storeService: storeService,
+		cdc:          cdc,
+		addressCodec: addressCodec,
+		authority:    authority,
+
+		bankKeeper: bankKeeper,
+		Params:     collections.NewItem(sb, types.ParamsKey, "params", codec.CollValue[types.Params](cdc)),
+	}
+
+	schema, err := sb.Build()
+	if err != nil {
+		panic(err)
+	}
+	k.Schema = schema
+
+	return k
 }
 
-func (k Keeper) ScooterInfo(ctx context.Context, req *types.QueryScooterInfoRequest) (*types.QueryScooterInfoResponse, error) {
-	return &types.QueryScooterInfoResponse{Info: "placeholder"}, nil
+// GetAuthority returns the module's authority.
+func (k Keeper) GetAuthority() []byte {
+	return k.authority
 }
