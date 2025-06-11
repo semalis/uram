@@ -1,0 +1,17 @@
+syntax = "proto3";
+package uram.scooter.v1;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "uram/scooter/v1/params.proto";
+
+option go_package = "github.com/semalis/uram/x/scooter/types";
+
+// GenesisState defines the scooter module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
