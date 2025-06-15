@@ -1,40 +1,74 @@
+// proto/uram/scooter/v1/tx.proto
 syntax = "proto3";
 package uram.scooter.v1;
 
-import "amino/amino.proto";
+option go_package = "github.com/semalis/uram/x/scooter/types";
+
+import "cosmos/base/v1beta1/coin.proto";
 import "cosmos/msg/v1/msg.proto";
 import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
+import "amino/amino.proto";
 import "uram/scooter/v1/params.proto";
 
-option go_package = "github.com/semalis/uram/x/scooter/types";
 
-// Msg defines the Msg service.
-service Msg {
-  option (cosmos.msg.v1.service) = true;
+message MsgCreateScooter {
+  option (cosmos.msg.v1.signer) = "creator";
 
-  // UpdateParams defines a (governance) operation for updating the module
-  // parameters. The authority defaults to the x/gov module account.
-  rpc UpdateParams(MsgUpdateParams) returns (MsgUpdateParamsResponse);
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 id = 2;
+  string location = 3;
+  cosmos.base.v1beta1.Coin price = 4;
 }
 
-// MsgUpdateParams is the Msg/UpdateParams request type.
+message MsgCreateScooterResponse {}
+
+message MsgUpdateScooter {
+  option (cosmos.msg.v1.signer) = "creator";
+
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 id = 2;
+  string location = 3;
+  cosmos.base.v1beta1.Coin price = 4;
+}
+
+message MsgUpdateScooterResponse {}
+
+message MsgDeleteScooter {
+  option (cosmos.msg.v1.signer) = "creator";
+
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 id = 2;
+}
+
+message MsgDeleteScooterResponse {}
+
 message MsgUpdateParams {
   option (cosmos.msg.v1.signer) = "authority";
   option (amino.name) = "uram/x/scooter/MsgUpdateParams";
 
-  // authority is the address that controls the module (defaults to x/gov unless overwritten).
   string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
-
-  // params defines the module parameters to update.
-  //
-  // NOTE: All parameters must be supplied.
-  Params params = 2 [
+  uram.scooter.v1.Params params = 2 [
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
 }
 
-// MsgUpdateParamsResponse defines the response structure for executing a
-// MsgUpdateParams message.
 message MsgUpdateParamsResponse {}
+
+message Scooter {
+  uint64 id = 1;
+  string owner = 2;
+  string location = 3;
+  bool active = 4;
+  cosmos.base.v1beta1.Coin price = 5;
+}
+
+service Msg {
+  option (cosmos.msg.v1.service) = true;
+
+  rpc CreateScooter(MsgCreateScooter) returns (MsgCreateScooterResponse);
+  rpc UpdateScooter(MsgUpdateScooter) returns (MsgUpdateScooterResponse);
+  rpc DeleteScooter(MsgDeleteScooter) returns (MsgDeleteScooterResponse);
+  rpc UpdateParams(MsgUpdateParams) returns (MsgUpdateParamsResponse);
+}
