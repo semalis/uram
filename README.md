@@ -58,8 +58,6 @@ sudo apt install mc btop nano screen git make build-essential
 git clone https://github.com/semalis/uram.git
 ```
 
-```
-
 ### Build binary
 
 ```
@@ -70,7 +68,7 @@ make install
 
 ### Init
 
-```bash:
+```
 uramd init "<moniker-name>" --chain-id  uram-testnet-1
 ```
 
@@ -82,7 +80,7 @@ sed -i -e "s|^minimum-gas-prices *=.*|minimum-gas-prices = \"0.0025uuram\"|" $HO
 
 ### Generate keys
 
-```bash:
+```
 # To create new keypair - make sure you save the mnemonics!
 uramd keys add <key-name>
 ```
