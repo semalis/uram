@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/semalis/uram/x/uram/keeper"
-	"github.com/semalis/uram/x/uram/types"
+	"uram/x/uram/keeper"
+	"uram/x/uram/types"
 )
 
 func TestParamsQuery(t *testing.T) {

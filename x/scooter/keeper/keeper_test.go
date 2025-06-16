@@ -13,9 +13,9 @@ import (
 	moduletestutil "github.com/cosmos/cosmos-sdk/types/module/testutil"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	"github.com/semalis/uram/x/scooter/keeper"
-	module "github.com/semalis/uram/x/scooter/module"
-	"github.com/semalis/uram/x/scooter/types"
+	"uram/x/scooter/keeper"
+	module "uram/x/scooter/module"
+	"uram/x/scooter/types"
 )
 
 type fixture struct {
@@ -41,7 +41,6 @@ func initFixture(t *testing.T) *fixture {
 		encCfg.Codec,
 		addressCodec,
 		authority,
-		nil,
 	)
 
 	// Initialize params

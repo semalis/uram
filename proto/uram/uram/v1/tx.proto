@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package uram.uram.v1;
 
 import "amino/amino.proto";
@@ -6,8 +7,9 @@ import "cosmos/msg/v1/msg.proto";
 import "cosmos_proto/cosmos.proto";
 import "gogoproto/gogo.proto";
 import "uram/uram/v1/params.proto";
+import "cosmos/base/v1beta1/coin.proto";
 
-option go_package = "github.com/semalis/uram/x/uram/types";
+option go_package = "uram/x/uram/types";
 
 // Msg defines the Msg service.
 service Msg {
@@ -16,6 +18,15 @@ service Msg {
   // UpdateParams defines a (governance) operation for updating the module
   // parameters. The authority defaults to the x/gov module account.
   rpc UpdateParams(MsgUpdateParams) returns (MsgUpdateParamsResponse);
+
+  // CreateScooter defines the CreateScooter RPC.
+  rpc CreateScooter(MsgCreateScooter) returns (MsgCreateScooterResponse);
+
+  // UpdateScooter defines the UpdateScooter RPC.
+  rpc UpdateScooter(MsgUpdateScooter) returns (MsgUpdateScooterResponse);
+
+  // DeleteScooter defines the DeleteScooter RPC.
+  rpc DeleteScooter(MsgDeleteScooter) returns (MsgDeleteScooterResponse);
 }
 
 // MsgUpdateParams is the Msg/UpdateParams request type.
@@ -27,7 +38,7 @@ message MsgUpdateParams {
   string authority = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
 
   // params defines the module parameters to update.
-  //
+
   // NOTE: All parameters must be supplied.
   Params params = 2 [
     (gogoproto.nullable) = false,
@@ -38,3 +49,42 @@ message MsgUpdateParams {
 // MsgUpdateParamsResponse defines the response structure for executing a
 // MsgUpdateParams message.
 message MsgUpdateParamsResponse {}
+
+// MsgCreateScooter defines the MsgCreateScooter message.
+message MsgCreateScooter {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string location = 2;
+  bool active = 3;
+  string owner = 4;
+  cosmos.base.v1beta1.Coin price = 5;
+}
+
+// MsgCreateScooterResponse defines the MsgCreateScooterResponse message.
+message MsgCreateScooterResponse {
+  uint64 id = 1;
+}
+
+// MsgUpdateScooter defines the MsgUpdateScooter message.
+message MsgUpdateScooter {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 id = 2;
+  string location = 3;
+  bool active = 4;
+  string owner = 5;
+  cosmos.base.v1beta1.Coin price = 6;
+}
+
+// MsgUpdateScooterResponse defines the MsgUpdateScooterResponse message.
+message MsgUpdateScooterResponse {}
+
+// MsgDeleteScooter defines the MsgDeleteScooter message.
+message MsgDeleteScooter {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  uint64 id = 2;
+}
+
+// MsgDeleteScooterResponse defines the MsgDeleteScooterResponse message.
+message MsgDeleteScooterResponse {}

@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package uram.uram.v1;
 
 import "amino/amino.proto";
@@ -6,14 +7,25 @@ import "cosmos/base/query/v1beta1/pagination.proto";
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "uram/uram/v1/params.proto";
+import "uram/uram/v1/scooter.proto";
 
-option go_package = "github.com/semalis/uram/x/uram/types";
+option go_package = "uram/x/uram/types";
 
 // Query defines the gRPC querier service.
 service Query {
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/semalis/uram/uram/v1/params";
+    option (google.api.http).get = "/uram/uram/v1/params";
+  }
+
+  // ListScooter Queries a list of Scooter items.
+  rpc GetScooter(QueryGetScooterRequest) returns (QueryGetScooterResponse) {
+    option (google.api.http).get = "/uram/uram/v1/scooter/{id}";
+  }
+
+  // ListScooter defines the ListScooter RPC.
+  rpc ListScooter(QueryAllScooterRequest) returns (QueryAllScooterResponse) {
+    option (google.api.http).get = "/uram/uram/v1/scooter";
   }
 }
 
@@ -27,4 +39,25 @@ message QueryParamsResponse {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
+}
+
+// QueryGetScooterRequest defines the QueryGetScooterRequest message.
+message QueryGetScooterRequest {
+  uint64 id = 1;
+}
+
+// QueryGetScooterResponse defines the QueryGetScooterResponse message.
+message QueryGetScooterResponse {
+  Scooter scooter = 1 [(gogoproto.nullable) = false];
+}
+
+// QueryAllScooterRequest defines the QueryAllScooterRequest message.
+message QueryAllScooterRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+// QueryAllScooterResponse defines the QueryAllScooterResponse message.
+message QueryAllScooterResponse {
+  repeated Scooter scooter = 1 [(gogoproto.nullable) = false];
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }

@@ -1,0 +1,15 @@
+syntax = "proto3";
+package uram.uram.v1;
+
+option go_package = "uram/x/uram/types";
+import "cosmos/base/v1beta1/coin.proto";
+
+// Scooter defines the Scooter message.
+message Scooter {
+  uint64 id = 1;
+  string location = 2;
+  bool active = 3;
+  string owner = 4;
+  string creator = 5;
+  cosmos.base.v1beta1.Coin price = 6;
+}

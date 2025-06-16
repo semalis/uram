@@ -9,8 +9,8 @@ import (
 	"github.com/cosmos/cosmos-sdk/codec"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	"github.com/semalis/uram/x/uram/keeper"
-	"github.com/semalis/uram/x/uram/types"
+	"uram/x/uram/keeper"
+	"uram/x/uram/types"
 )
 
 var _ depinject.OnePerModuleType = AppModule{}

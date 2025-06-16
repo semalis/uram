@@ -3,7 +3,8 @@ package types_test
 import (
 	"testing"
 
-	"github.com/semalis/uram/x/uram/types"
+	"uram/x/uram/types"
+
 	"github.com/stretchr/testify/require"
 )
 
@@ -20,8 +21,31 @@ func TestGenesisState_Validate(t *testing.T) {
 		},
 		{
 			desc:     "valid genesis state",
-			genState: &types.GenesisState{},
-			valid:    true,
+			genState: &types.GenesisState{ScooterList: []types.Scooter{{Id: 0}, {Id: 1}}, ScooterCount: 2}, valid: true,
+		}, {
+			desc: "duplicated scooter",
+			genState: &types.GenesisState{
+				ScooterList: []types.Scooter{
+					{
+						Id: 0,
+					},
+					{
+						Id: 0,
+					},
+				},
+			},
+			valid: false,
+		}, {
+			desc: "invalid scooter count",
+			genState: &types.GenesisState{
+				ScooterList: []types.Scooter{
+					{
+						Id: 1,
+					},
+				},
+				ScooterCount: 0,
+			},
+			valid: false,
 		},
 	}
 	for _, tc := range tests {

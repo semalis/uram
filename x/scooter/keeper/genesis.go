@@ -3,7 +3,7 @@ package keeper
 import (
 	"context"
 
-	"github.com/semalis/uram/x/scooter/types"
+	"uram/x/scooter/types"
 )
 
 // InitGenesis initializes the module's state from a provided genesis state.

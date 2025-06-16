@@ -17,3 +17,8 @@ const (
 
 // ParamsKey is the prefix to retrieve all Params
 var ParamsKey = collections.NewPrefix("p_uram")
+
+var (
+	ScooterKey      = collections.NewPrefix("scooter/value/")
+	ScooterCountKey = collections.NewPrefix("scooter/count/")
+)

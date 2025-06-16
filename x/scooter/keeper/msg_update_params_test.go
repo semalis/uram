@@ -5,8 +5,8 @@ import (
 
 	"github.com/stretchr/testify/require"
 
-	"github.com/semalis/uram/x/scooter/keeper"
-	"github.com/semalis/uram/x/scooter/types"
+	"uram/x/scooter/keeper"
+	"uram/x/scooter/types"
 )
 
 func TestMsgUpdateParams(t *testing.T) {

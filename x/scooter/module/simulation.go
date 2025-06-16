@@ -4,7 +4,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/module"
 	simtypes "github.com/cosmos/cosmos-sdk/types/simulation"
 
-	"github.com/semalis/uram/x/scooter/types"
+	"uram/x/scooter/types"
 )
 
 // GenerateGenesisState creates a randomized GenState of the module.

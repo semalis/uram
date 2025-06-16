@@ -5,7 +5,7 @@ import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 import "uram/scooter/v1/params.proto";
 
-option go_package = "github.com/semalis/uram/x/scooter/types";
+option go_package = "uram/x/scooter/types";
 
 // GenesisState defines the scooter module's genesis state.
 message GenesisState {

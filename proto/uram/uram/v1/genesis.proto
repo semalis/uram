@@ -1,11 +1,13 @@
 syntax = "proto3";
+
 package uram.uram.v1;
 
 import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 import "uram/uram/v1/params.proto";
+import "uram/uram/v1/scooter.proto";
 
-option go_package = "github.com/semalis/uram/x/uram/types";
+option go_package = "uram/x/uram/types";
 
 // GenesisState defines the uram module's genesis state.
 message GenesisState {
@@ -14,4 +16,6 @@ message GenesisState {
     (gogoproto.nullable) = false,
     (amino.dont_omitempty) = true
   ];
+  repeated Scooter scooter_list = 2 [(gogoproto.nullable) = false];
+  uint64 scooter_count = 3;
 }

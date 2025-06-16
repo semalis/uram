@@ -14,8 +14,8 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
 
-	"github.com/semalis/uram/x/scooter/keeper"
-	"github.com/semalis/uram/x/scooter/types"
+	"uram/x/scooter/keeper"
+	"uram/x/scooter/types"
 )
 
 var (

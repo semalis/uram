@@ -13,9 +13,9 @@ import (
 	moduletestutil "github.com/cosmos/cosmos-sdk/types/module/testutil"
 	authtypes "github.com/cosmos/cosmos-sdk/x/auth/types"
 
-	"github.com/semalis/uram/x/uram/keeper"
-	module "github.com/semalis/uram/x/uram/module"
-	"github.com/semalis/uram/x/uram/types"
+	"uram/x/uram/keeper"
+	module "uram/x/uram/module"
+	"uram/x/uram/types"
 )
 
 type fixture struct {

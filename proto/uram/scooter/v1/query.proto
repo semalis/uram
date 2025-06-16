@@ -7,67 +7,18 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "uram/scooter/v1/params.proto";
 
-import "cosmos/base/v1beta1/coin.proto";
-// import "uram/scooter/v1/scooter.proto";
-import "uram/scooter/v1/tx.proto";
-import "cosmos_proto/cosmos.proto";
-
-option go_package = "github.com/semalis/uram/x/scooter/types";
+option go_package = "uram/x/scooter/types";
 
 // Query defines the gRPC querier service.
-//service Query {
-//  // Parameters queries the parameters of the module.
-//  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-//    option (google.api.http).get = "/semalis/uram/scooter/v1/params";
-//  }
-//}
-
-// Params запрос
-message QueryParamsRequest {}
-
-//message QueryParamsResponse {
-//  Params params = 1 [(gogoproto.nullable) = false];
-//}
-
-// Получение самоката по ID
-message QueryGetScooterRequest {
-  uint64 id = 1;
-}
-
-message QueryGetScooterResponse {
-  Scooter scooter = 1;
-}
-
-// Получение всех самокатов с пагинацией
-message QueryAllScooterRequest {
-  cosmos.base.query.v1beta1.PageRequest pagination = 1;
-}
-
-message QueryAllScooterResponse {
-  repeated Scooter scooters = 1;
-  cosmos.base.query.v1beta1.PageResponse pagination = 2;
-}
-
-// gRPC Query service
-//service Query {
-//  rpc Params(QueryParamsRequest) returns (QueryParamsResponse);
-//  rpc Scooter(QueryGetScooterRequest) returns (QueryGetScooterResponse);
-//  rpc ScooterAll(QueryAllScooterRequest) returns (QueryAllScooterResponse);
-//}
-
-// ================================
-
 service Query {
-  rpc Scooter(QueryGetScooterRequest) returns (QueryGetScooterResponse);
-  rpc ScooterAll(QueryAllScooterRequest) returns (QueryAllScooterResponse);
   // Parameters queries the parameters of the module.
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
-    option (google.api.http).get = "/semalis/uram/scooter/v1/params";
+    option (google.api.http).get = "/uram/scooter/v1/params";
   }
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
-//message QueryParamsRequest {}
+message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
@@ -77,21 +28,3 @@ message QueryParamsResponse {
     (amino.dont_omitempty) = true
   ];
 }
-
-
-//message QueryGetScooterRequest {
-//  uint64 id = 1;
-//}
-
-//message QueryGetScooterResponse {
-//  Scooter scooter = 1;
-//}
-
-//message QueryAllScooterRequest {
-//  cosmos.base.query.v1beta1.PageRequest pagination = 1;
-//}
-//
-//message QueryAllScooterResponse {
-//  repeated Scooter scooters = 1;
-//  cosmos.base.query.v1beta1.PageResponse pagination = 2;
-//}

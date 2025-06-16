@@ -45,9 +45,9 @@ import (
 	ibctransferkeeper "github.com/cosmos/ibc-go/v10/modules/apps/transfer/keeper"
 	ibckeeper "github.com/cosmos/ibc-go/v10/modules/core/keeper"
 
-	"github.com/semalis/uram/docs"
-	scootermodulekeeper "github.com/semalis/uram/x/scooter/keeper"
-	urammodulekeeper "github.com/semalis/uram/x/uram/keeper"
+	"uram/docs"
+	scootermodulekeeper "uram/x/scooter/keeper"
+	urammodulekeeper "uram/x/uram/keeper"
 )
 
 const (

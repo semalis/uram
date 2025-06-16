@@ -4,7 +4,7 @@ package uram.uram.v1;
 import "amino/amino.proto";
 import "gogoproto/gogo.proto";
 
-option go_package = "github.com/semalis/uram/x/uram/types";
+option go_package = "uram/x/uram/types";
 
 // Params defines the parameters for the module.
 message Params {

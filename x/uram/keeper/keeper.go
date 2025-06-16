@@ -8,7 +8,7 @@ import (
 	corestore "cosmossdk.io/core/store"
 	"github.com/cosmos/cosmos-sdk/codec"
 
-	"github.com/semalis/uram/x/uram/types"
+	"uram/x/uram/types"
 )
 
 type Keeper struct {
@@ -19,8 +19,10 @@ type Keeper struct {
 	// Typically, this should be the x/gov module account.
 	authority []byte
 
-	Schema collections.Schema
-	Params collections.Item[types.Params]
+	Schema     collections.Schema
+	Params     collections.Item[types.Params]
+	ScooterSeq collections.Sequence
+	Scooter    collections.Map[uint64, types.Scooter]
 }
 
 func NewKeeper(
@@ -42,9 +44,10 @@ func NewKeeper(
 		addressCodec: addressCodec,
 		authority:    authority,
 
-		Params: collections.NewItem(sb, types.ParamsKey, "params", codec.CollValue[types.Params](cdc)),
+		Params:     collections.NewItem(sb, types.ParamsKey, "params", codec.CollValue[types.Params](cdc)),
+		Scooter:    collections.NewMap(sb, types.ScooterKey, "scooter", collections.Uint64Key, codec.CollValue[types.Scooter](cdc)),
+		ScooterSeq: collections.NewSequence(sb, types.ScooterCountKey, "scooterSequence"),
 	}
-
 	schema, err := sb.Build()
 	if err != nil {
 		panic(err)

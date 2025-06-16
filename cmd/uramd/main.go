@@ -7,8 +7,8 @@ import (
 	clienthelpers "cosmossdk.io/client/v2/helpers"
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 
-	"github.com/semalis/uram/app"
-	"github.com/semalis/uram/cmd/uramd/cmd"
+	"uram/app"
+	"uram/cmd/uramd/cmd"
 )
 
 func main() {

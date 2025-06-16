@@ -3,16 +3,17 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/semalis/uram/x/uram/types"
+	"uram/x/uram/types"
 
 	"github.com/stretchr/testify/require"
 )
 
 func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
-		Params: types.DefaultParams(),
+		Params:       types.DefaultParams(),
+		ScooterList:  []types.Scooter{{Id: 0}, {Id: 1}},
+		ScooterCount: 2,
 	}
-
 	f := initFixture(t)
 	err := f.keeper.InitGenesis(f.ctx, genesisState)
 	require.NoError(t, err)
@@ -21,4 +22,7 @@ func TestGenesis(t *testing.T) {
 	require.NotNil(t, got)
 
 	require.EqualExportedValues(t, genesisState.Params, got.Params)
+	require.EqualExportedValues(t, genesisState.ScooterList, got.ScooterList)
+	require.Equal(t, genesisState.ScooterCount, got.ScooterCount)
+
 }

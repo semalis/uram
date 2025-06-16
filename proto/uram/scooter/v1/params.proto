@@ -3,18 +3,13 @@ package uram.scooter.v1;
 
 import "amino/amino.proto";
 import "gogoproto/gogo.proto";
-import "cosmos_proto/cosmos.proto";
 
-option go_package = "github.com/semalis/uram/x/scooter/types";
+option go_package = "uram/x/scooter/types";
 
-option (cosmos_proto.module) = {
-  name: "scooter"
-  type_url: "github.com/semalis/uram/x/scooter/types.Module"
-};
-
+// Params defines the parameters for the module.
 message Params {
   option (amino.name) = "uram/x/scooter/Params";
   option (gogoproto.equal) = true;
 
-  string admin = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string admin = 1;
 }

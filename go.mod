@@ -1,4 +1,4 @@
-module github.com/semalis/uram
+module uram
 
 go 1.24.0
 

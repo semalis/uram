@@ -3,7 +3,7 @@ package keeper_test
 import (
 	"testing"
 
-	"github.com/semalis/uram/x/scooter/types"
+	"uram/x/scooter/types"
 
 	"github.com/stretchr/testify/require"
 )

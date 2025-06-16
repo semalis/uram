@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/semalis/uram/x/uram/types"
+	"uram/x/uram/types"
 )
 
 type msgServer struct {

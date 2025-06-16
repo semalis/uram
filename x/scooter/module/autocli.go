@@ -3,7 +3,7 @@ package scooter
 import (
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
 
-	"github.com/semalis/uram/x/scooter/types"
+	"uram/x/scooter/types"
 )
 
 // AutoCLIOptions implements the autocli.HasAutoCLIConfig interface.

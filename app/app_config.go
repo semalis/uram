@@ -2,6 +2,10 @@ package app
 
 import (
 	"time"
+	_ "uram/x/scooter/module"
+	scootermoduletypes "uram/x/scooter/types"
+	_ "uram/x/uram/module"
+	urammoduletypes "uram/x/uram/types"
 
 	runtimev1alpha1 "cosmossdk.io/api/cosmos/app/runtime/v1alpha1"
 	appv1alpha1 "cosmossdk.io/api/cosmos/app/v1alpha1"
@@ -67,10 +71,6 @@ import (
 	icatypes "github.com/cosmos/ibc-go/v10/modules/apps/27-interchain-accounts/types"
 	ibctransfertypes "github.com/cosmos/ibc-go/v10/modules/apps/transfer/types"
 	ibcexported "github.com/cosmos/ibc-go/v10/modules/core/exported"
-	_ "github.com/semalis/uram/x/scooter/module"
-	scootermoduletypes "github.com/semalis/uram/x/scooter/types"
-	_ "github.com/semalis/uram/x/uram/module"
-	urammoduletypes "github.com/semalis/uram/x/uram/types"
 	"google.golang.org/protobuf/types/known/durationpb"
 )
 
@@ -85,7 +85,6 @@ var (
 		{Account: nft.ModuleName},
 		{Account: ibctransfertypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner}},
 		{Account: icatypes.ModuleName},
-		{Account: scootermoduletypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner, authtypes.Staking}},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 

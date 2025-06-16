@@ -3,11 +3,11 @@ package uram.scooter.module.v1;
 
 import "cosmos/app/v1alpha1/module.proto";
 
-option go_package = "github.com/semalis/uram/x/scooter/types";
+option go_package = "uram/x/scooter/types";
 
 // Module is the config object for the module.
 message Module {
-  option (cosmos.app.v1alpha1.module) = {go_import: "github.com/semalis/uram/x/scooter"};
+  option (cosmos.app.v1alpha1.module) = {go_import: "uram/x/scooter"};
 
   // authority defines the custom module authority.
   // If not set, defaults to the governance module.
